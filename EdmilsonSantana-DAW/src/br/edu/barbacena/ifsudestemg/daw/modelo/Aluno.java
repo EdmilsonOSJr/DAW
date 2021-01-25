@@ -7,7 +7,18 @@ public class Aluno {
 	private Long id;
 	private String nome;
 	private String email;
+	private String endereco;
 	private Calendar dataNascimento;
+	
+	
+	public String getEndereco() {
+		return this.endereco;
+	}
+	
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+	
 	public Long getId() {
 		return id;
 	}

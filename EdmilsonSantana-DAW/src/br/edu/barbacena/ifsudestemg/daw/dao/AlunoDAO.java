@@ -20,16 +20,21 @@ public class AlunoDAO {
 		this.connection = ConnectionFactory.getConection();
 	}
 	
+	public void fecharConexao() throws SQLException {
+		connection.close();
+	}
+	
 	
 	public void adiciona(Aluno aluno) {
-		String sql = "insert into aluno (nome,email,datanascimento) values (?,?,?)";
+		String sql = "insert into alunos (nome,email,endereco,datanascimento) values (?,?,?,?)";
 		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, aluno.getNome());
 			stmt.setString(2, aluno.getEmail());
+			stmt.setString(3, aluno.getEndereco());
 			Date data = new Date(aluno.getDataNascimento().getTimeInMillis());
-			stmt.setDate(3, data);
+			stmt.setDate(4, data);
 			stmt.execute();
 			
 			
@@ -41,7 +46,7 @@ public class AlunoDAO {
 	
 	
 	public void remove(Aluno aluno) {
-		String sql = "delete from aluno where id = ?";
+		String sql = "delete from alunos where id = ?";
 				
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -53,14 +58,15 @@ public class AlunoDAO {
 	}
 	
 	public void altera(Aluno aluno) {
-		String sql = "update aluno set nome=?, email=?, datanascimento=? where id=?";
+		String sql = "update alunos set nome=?, email=?, endereco=?,datanascimento=? where id=?";
 		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, aluno.getNome());
 			stmt.setString(2, aluno.getEmail());
-			stmt.setDate(3, new Date(aluno.getDataNascimento().getTimeInMillis()));
-			stmt.setLong(4, aluno.getId());
+			stmt.setString(3, aluno.getEndereco());
+			stmt.setDate(4, new Date(aluno.getDataNascimento().getTimeInMillis()));
+			stmt.setLong(5, aluno.getId());
 			stmt.execute();
 			
 		}catch(SQLException e) {
@@ -71,7 +77,7 @@ public class AlunoDAO {
 	
 	public List<Aluno> listaAlunos(){
 		List<Aluno> alunos = new ArrayList<>();
-		String sql = "select * from aluno";
+		String sql = "select * from alunos";
 		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -80,7 +86,8 @@ public class AlunoDAO {
 				Aluno aluno = new Aluno();
 				aluno.setId(rs.getLong("id"));				
 				aluno.setNome(rs.getString("nome"));				
-				aluno.setEmail(rs.getString("email"));				
+				aluno.setEmail(rs.getString("email"));	
+				aluno.setEndereco(rs.getString("endereco"));
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("datanascimento"));
 				aluno.setDataNascimento(data);
