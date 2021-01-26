@@ -37,7 +37,7 @@ public class TestarProfessorDAO {
 				}
 			} catch (NumberFormatException e) {
 				entrada.nextLine();
-				System.err.println("Digite um dos número!!!");
+				System.err.println("Digite um número!!!");
 			}
 
 		}
