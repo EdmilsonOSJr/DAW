@@ -3,64 +3,74 @@ package br.edu.barbacena.ifsudestemg.daw.teste;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 import br.edu.barbacena.ifsudestemg.daw.dao.AlunoDAO;
-import br.edu.barbacena.ifsudestemg.daw.jdbc.ConnectionFactory;
 import br.edu.barbacena.ifsudestemg.daw.modelo.Aluno;
 
 public class TestarAlunoDAO {
 	
-	private static AlunoDAO dao;
+	private  AlunoDAO dao;
+	private  Scanner entrada;
 	
+	
+	// chama construtor
 	public static void main(String[] args) {
-		int opcao = 0;
-		Scanner entrada = new Scanner(System.in);
-
+		new TestarAlunoDAO();
+	}
+	
+	
+	// da valor as variaveis e chama a função que inicia a interação
+	public TestarAlunoDAO() {
+		dao = new AlunoDAO();
+		entrada = new Scanner(System.in);
+		inicializa();
+	}
+	
+	
+	public void inicializa() {
 		
+		int opcao = 0;
+
 		while(true) {
 			System.out.println(
 					"\n=> Escolha uma dentre as opções" + "\n1-Adicionar Aluno\n2-Remover "
-							+ "Alunon\n3-Atualizar Aluno\n4-Listar Alunos\n0-Sair");
+							+ "Aluno\n3-Atualizar Aluno\n4-Listar Alunos\n0-Sair");
 			try {
-				opcao = entrada.nextInt();
+				opcao = Integer.parseInt(entrada.nextLine());
 				if(opcao != 0) {
 					menu(opcao);
-					break;
 				}
-				else
+				else {
 					entrada.close();
-			} catch (InputMismatchException e) {
+					break;					
+				}
+			} catch (NumberFormatException e) {
 				entrada.nextLine();
 				System.err.println("Digite um dos número!!!");
 			}
 			
 		}
 		
-		
-
-		
 	}
 	
-	public static void menu(int opcao) {
-		dao = new AlunoDAO(ConnectionFactory.getConection());
-		List <Aluno> alunos;
+	public void menu(int opcao) {
+
+		Aluno aluno = new Aluno();
 		
 		switch (opcao) {
 		case 1:
-			dao.adiciona(lerDados());
+			dao.adiciona(lerDados(aluno));
 			break;
 		case 2:
 			dao.remove(PegarId());
 			break;
 		case 3:
-			dao.adiciona(lerDados());
+			dao.altera(lerDados(PegarId()));
 			break;
 		case 4:
-			alunos = dao.listaAlunos();
-			exibeAlunos(alunos);
+			exibeAlunos(dao.listaAlunos());
 			break;
 		default:
 			System.out.println("Número incorreto!!!");
@@ -69,18 +79,19 @@ public class TestarAlunoDAO {
 		
 	}
 	
-	public static Aluno PegarId() {
-		Scanner entrada = new Scanner(System.in);
+	
+	
+	public Aluno PegarId() {
+
 		Aluno aluno = new Aluno();
 		Long id;
 		
 		while(true) {			
 			try {
 				System.out.println("\nForceça o id do aluno:");
-				id = entrada.nextLong();
-				entrada.close();
+				id = Long.parseLong(entrada.nextLine());
 				break;
-			} catch (InputMismatchException e) {
+			} catch (NumberFormatException e) {
 				entrada.nextLine();
 				System.err.println("Dados inconpatíves !!!");
 			}
@@ -90,7 +101,7 @@ public class TestarAlunoDAO {
 		return aluno;
 	}
 	
-	public static void exibeAlunos(List<Aluno> alunos) {
+	public void exibeAlunos(List<Aluno> alunos) {
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		
 		for(Aluno aluno : alunos) {
@@ -100,10 +111,9 @@ public class TestarAlunoDAO {
 		}
 	}
 	
-	public static Aluno lerDados() {
-		Scanner entrada = new Scanner(System.in);
+	public Aluno lerDados(Aluno aluno) {
+
 		String nome, email, endereco, dataNacimento;	
-		Aluno aluno = new Aluno();
 		Calendar data = Calendar.getInstance();
 		SimpleDateFormat df ;
 		
@@ -115,7 +125,7 @@ public class TestarAlunoDAO {
 				email = entrada.nextLine();
 				endereco = entrada.nextLine();
 				dataNacimento = entrada.nextLine();	
-				entrada.close();
+	
 				df = new SimpleDateFormat("dd/MM/yyyy");
 				data.setTime(df.parse(dataNacimento));
 				break;

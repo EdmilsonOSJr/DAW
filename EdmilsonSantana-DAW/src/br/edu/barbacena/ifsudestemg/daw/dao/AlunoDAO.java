@@ -16,7 +16,7 @@ public class AlunoDAO {
 	
 	private Connection connection;
 
-	public AlunoDAO(Connection connection) {
+	public AlunoDAO() {
 		this.connection = ConnectionFactory.getConection();
 	}
 	
