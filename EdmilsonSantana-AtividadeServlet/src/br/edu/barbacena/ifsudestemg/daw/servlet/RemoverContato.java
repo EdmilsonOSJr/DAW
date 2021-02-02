@@ -1,44 +1,36 @@
 package br.edu.barbacena.ifsudestemg.daw.servlet;
 
-import static br.edu.barbacena.ifsudestemg.daw.servlet.MenuAtividade7.agenda;
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static br.edu.barbacena.ifsudestemg.daw.servlet.MenuAtividade7.agenda;
 
-import modelo.java.Contato;
-
-@WebServlet("/listarContato")
-public class ListarContato extends HttpServlet{
+@WebServlet("/removerContato")
+public class RemoverContato extends HttpServlet{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		PrintWriter out = response.getWriter();
 		
-		List<Contato> cont = agenda.listaContatos();
+		String nome = request.getParameter("nome");
 		
-		out.println("<html");
-		out.println("<body");
-		for(Contato contato: cont) {
-			out.println("<br>"+contato.getNome()+"<br\\>");
-			out.println("<br>"+contato.getEmail()+"<br\\>");
-			out.println("<br>"+contato.getTelefone()+"<br \\>");
-		}
-		out.println("</body");
-		out.println("</html");
+		int contatoRemovido = agenda.removeContato(nome);
+		
+		if(contatoRemovido==-1)
+			out.println("O Contato não existe");
+		else
+			out.println("O contato "+nome+" foi removido com sucesso.");
 		
 	}
 }

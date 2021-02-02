@@ -1,6 +1,9 @@
 package br.edu.barbacena.ifsudestemg.daw.servlet;
 
 import java.io.IOException;
+
+
+
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -9,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.java.AgendaContatos;
+import static br.edu.barbacena.ifsudestemg.daw.servlet.MenuAtividade7.agenda;
 import modelo.java.Contato;
 
 
@@ -36,10 +39,12 @@ public class AdicionarContato extends HttpServlet{
 		contato.setEmail(email);
 		contato.setTelefone(telefone);
 		
-		AgendaContatos agenda = new AgendaContatos();
-		agenda.adicionaContato(contato);
+		int contatoVálido = agenda.adicionaContato(contato);
 		
-		out.println("O contato "+contato.getNome()+" foi adicionado com sucesso.");
+		if(contatoVálido==-1)
+			out.println("O contato "+contato.getNome()+" já existe.");
+		else
+			out.println("O contato "+contato.getNome()+" foi adicionado com sucesso.");
 		
 	}
 }

@@ -5,18 +5,24 @@ import java.util.List;
 
 public class AgendaContatos {
 	
-	private List<Contato> contatos = new ArrayList<>();
+	private List<Contato> contatos;
 	
 	
+	
+	public AgendaContatos() {
+		contatos = new ArrayList<Contato>();
+	}
+
 	public int adicionaContato(Contato contato) {
 		
 		int indice = pesquisarContato(contato.getNome());
 		
-		if(indice==-1)
-			return indice;
-		else {
-			contatos.add(contato);
+		if(indice==-1) {
+			contatos.add(contato); 
 			return 1;
+		}
+		else {
+			return -1;
 		}
 	}
 	

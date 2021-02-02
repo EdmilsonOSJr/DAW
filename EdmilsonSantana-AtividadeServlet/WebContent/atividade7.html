@@ -1,51 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Menu Horizontal</title>
-	<style type="text/css">
-	<!--
-		body {
-			padding:0px;
-			margin:0px;
-		}
- 
-		#menu ul {
-			padding:0px;
-			margin:0px;
-			float: left;
-			width: 100%;
-			background-color:#EDEDED;
-			list-style:none;
-			font:80% Tahoma;
-		}
- 
-		#menu ul li { display: inline; }
- 
-		#menu ul li a {
-			background-color:#EDEDED;
-			color: #333;
-			text-decoration: none;
-			border-bottom:3px solid #EDEDED;
-			padding: 2px 10px;
-			float:left;
-		}
- 
-		#menu ul li a:hover {
-			background-color:#D6D6D6;
-			color: #6D6D6D;
-			border-bottom:3px solid #EA0000;
-		}
-	-->
-	</style>
+	
 </head>
 <body>
-	<div id="menu">
-		<ul>
-			<li><a href="adicionarContato.html">Adicionar Contato</a></li>
-			<li><a href="listarContato">Remover Contato</a></li>
-			<li><a href="">Pesquisar Contato</a></li>
-			<li><a href="">Listar Contato</a></li>
-		</ul>
-	</div>
+	<form action="adicionarContato.html" method="get">
+		<input type="submit" value="adicionar Contato" />
+	</form>
+	<form action="pesquisarContato.html" method="get">
+		<input type="submit" value="Pesquisar Contato" />
+	</form>
+	<form action="removerContato.html" method="get">
+		<input type="submit" value="Remover Contato" />
+	</form>
+	<form action="listarContato" method="get">
+		<input type="submit" value="Listar Contatos" />
+	</form>
 </body>
 </html>

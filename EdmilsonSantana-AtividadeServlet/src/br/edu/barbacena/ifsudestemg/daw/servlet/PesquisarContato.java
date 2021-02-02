@@ -14,31 +14,38 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.java.Contato;
 
-@WebServlet("/listarContato")
-public class ListarContato extends HttpServlet{
+@WebServlet("/pesquisarContato")
+public class PesquisarContato extends HttpServlet{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		PrintWriter out = response.getWriter();
 		
-		List<Contato> cont = agenda.listaContatos();
+		String nome = request.getParameter("nome");
+	
+		int indiceContato = agenda.pesquisarContato(nome);
 		
-		out.println("<html");
-		out.println("<body");
-		for(Contato contato: cont) {
-			out.println("<br>"+contato.getNome()+"<br\\>");
-			out.println("<br>"+contato.getEmail()+"<br\\>");
-			out.println("<br>"+contato.getTelefone()+"<br \\>");
+		if(indiceContato==-1)
+			out.println("O contato não foi encontrado.");
+		else {
+			
+			List<Contato> contatos = agenda.listaContatos();
+			out.println("<html");
+			out.println("<body");
+			out.println("<br>Contato encontrado:<br\\>");
+			out.println("<br>"+contatos.get(indiceContato).getNome()+"<br\\>");
+			out.println("<br>"+contatos.get(indiceContato).getEmail()+"<br\\>");
+			out.println("<br>"+contatos.get(indiceContato).getTelefone()+"<br \\>");
+			out.println("</body");
+			out.println("</html");
 		}
-		out.println("</body");
-		out.println("</html");
-		
+			
+				
 	}
 }
