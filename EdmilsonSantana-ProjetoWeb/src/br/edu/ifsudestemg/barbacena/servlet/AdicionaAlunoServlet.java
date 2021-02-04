@@ -1,7 +1,6 @@
 package br.edu.ifsudestemg.barbacena.servlet;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +8,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +16,6 @@ import br.edu.barbacena.ifsudestemg.daw.dao.AlunoDAO;
 import br.edu.barbacena.ifsudestemg.daw.modelo.Aluno;
 
 
-@WebServlet("/adicionaAluno")
 public class AdicionaAlunoServlet extends HttpServlet{
 	
 	/**
@@ -35,7 +32,6 @@ public class AdicionaAlunoServlet extends HttpServlet{
 		String email = request.getParameter("email");
 		String endereco = request.getParameter("endereco");
 		String dataNascimentoTexto = request.getParameter("dataNascimento");
-		System.out.println(dataNascimentoTexto);
 		Calendar dataNascimento = null;
 		
 		try {
