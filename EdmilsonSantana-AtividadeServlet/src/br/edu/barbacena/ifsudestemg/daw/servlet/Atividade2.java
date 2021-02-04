@@ -22,7 +22,7 @@ public class Atividade2 extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter();
 		
 		Enumeration<String> nomesHeaders = request.getHeaderNames();
 		

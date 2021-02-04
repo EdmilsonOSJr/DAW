@@ -24,7 +24,7 @@ public class Atividade4 extends HttpServlet{
 
 		PrintWriter out = response.getWriter();
 		
-		long valor = 15;
+		long numero = 10;
 		
 		out.println("<html>");
 		out.println("<body>");
@@ -37,16 +37,16 @@ public class Atividade4 extends HttpServlet{
 		out.println("Fatorial");
 		out.println("</td>");
 		out.println("</tr>");
-		while(valor>=0){
+		while(numero>=0){
 			out.println("<tr>");
 			out.println("<td>");
-			out.println(valor);
+			out.println(numero);
 			out.println("</td>");
 			out.println("<td>");
-			out.println(calculaFatorial(valor));
+			out.println(fatorial(numero));
 			out.println("</td>");
 			out.println("</tr>");
-			valor--;
+			numero--;
 		}
 		
 		out.println("</table>");
@@ -54,11 +54,11 @@ public class Atividade4 extends HttpServlet{
 		out.println("</html>");
 	}
 	
-	public long calculaFatorial(long valor) {
+	public long fatorial(long numero) {
 		
-		if(valor==0)
+		if(numero==0)
 			return 1;
 		
-		return valor * calculaFatorial(valor-1);
+		return numero * fatorial(numero-1);
 	}
 }

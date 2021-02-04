@@ -28,8 +28,6 @@ public class Atividade3 extends HttpServlet{
 		out.println(Calendar.getInstance().getTime());
 		out.println("</body>");
 		out.println("</html>");
-		//out.println(dataHora.DATE);
-		
 		
 	}
 

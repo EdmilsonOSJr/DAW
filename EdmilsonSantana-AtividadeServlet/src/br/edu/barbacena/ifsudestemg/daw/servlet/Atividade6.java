@@ -26,7 +26,7 @@ public class Atividade6 extends HttpServlet{
 		String alturaTexto = request.getParameter("altura");
 		double peso = 0;
 		double altura = 0;
-		Double imc = 0.0;
+		double imc = 0.0;
 		
 		try {
 			

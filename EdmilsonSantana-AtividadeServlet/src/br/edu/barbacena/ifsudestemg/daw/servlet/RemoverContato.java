@@ -1,6 +1,7 @@
 package br.edu.barbacena.ifsudestemg.daw.servlet;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -8,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static br.edu.barbacena.ifsudestemg.daw.servlet.MenuAtividade7.agenda;
+import static br.edu.barbacena.ifsudestemg.daw.servlet.Atividade7.agenda;
 
 @WebServlet("/removerContato")
 public class RemoverContato extends HttpServlet{
@@ -25,12 +26,12 @@ public class RemoverContato extends HttpServlet{
 		
 		String nome = request.getParameter("nome");
 		
-		int contatoRemovido = agenda.removeContato(nome);
+		boolean contatoRemovido = agenda.removeContato(nome);
 		
-		if(contatoRemovido==-1)
-			out.println("O Contato não existe");
-		else
+		if(contatoRemovido)
 			out.println("O contato "+nome+" foi removido com sucesso.");
+		else
+			out.println("O Contato não existe");
 		
 	}
 }

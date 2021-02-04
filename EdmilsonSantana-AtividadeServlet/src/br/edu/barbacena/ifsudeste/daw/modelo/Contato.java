@@ -1,4 +1,4 @@
-package modelo.java;
+package br.edu.barbacena.ifsudeste.daw.modelo;
 
 public class Contato {
 	
@@ -6,6 +6,13 @@ public class Contato {
 	private String email;
 	private String telefone;
 	
+	
+	
+	public Contato(String nome, String email, String telefone) {
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+	}
 	
 	public String getNome() {
 		return nome;

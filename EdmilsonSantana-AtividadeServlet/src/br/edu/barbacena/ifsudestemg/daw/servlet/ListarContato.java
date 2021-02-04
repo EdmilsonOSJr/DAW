@@ -1,6 +1,6 @@
 package br.edu.barbacena.ifsudestemg.daw.servlet;
 
-import static br.edu.barbacena.ifsudestemg.daw.servlet.MenuAtividade7.agenda;
+import static br.edu.barbacena.ifsudestemg.daw.servlet.Atividade7.agenda;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.java.Contato;
+import br.edu.barbacena.ifsudeste.daw.modelo.Contato;
 
 @WebServlet("/listarContato")
 public class ListarContato extends HttpServlet{
