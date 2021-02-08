@@ -42,8 +42,8 @@
 					%>
 						
 					<tr> 
-						<th><%= celsiusInicio%></th>
-						<th><%= fahrenheit%></th>
+						<td><%= celsiusInicio%></td>
+						<td><%= fahrenheit%></td>
 					</tr>
 						
 						
