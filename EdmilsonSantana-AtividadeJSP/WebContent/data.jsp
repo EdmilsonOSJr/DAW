@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -8,7 +9,7 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<% String data = Calendar.getInstance().getTime().toString();%>
+		<% String data = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss").format(Calendar.getInstance().getTime());%>
 		
 		<%= data %>
 	</body>
