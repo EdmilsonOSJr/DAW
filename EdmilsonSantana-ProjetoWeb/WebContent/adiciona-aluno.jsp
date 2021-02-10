@@ -1,6 +1,10 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<body>
+		
+		<c:import url="cabecalho.jsp"/>
+		
 		<form action="adicionaAluno" method="get">
 			Nome:<input type = "text" name = "nome" /><br />
 			Email:<input type = "text" name = "email" /><br />	
@@ -8,5 +12,8 @@
 			Data Nacimento:<input type = "text" name = "dataNascimento" /><br />
 			<input type = "submit"  value = "Gravar" />
 		</form>
+
+		<c:import url="rodape.jsp"/>
+
 	</body>
 </html>
