@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<img src="imagens/roda.png">
+	<img src="imagens/rodape.png"/>
 </body>
 </html>
