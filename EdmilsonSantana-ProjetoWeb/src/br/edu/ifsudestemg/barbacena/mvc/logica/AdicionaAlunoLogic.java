@@ -1,6 +1,5 @@
-package br.edu.ifsudestemg.barbacena.servlet;
+package br.edu.ifsudestemg.barbacena.mvc.logica;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,25 +7,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.barbacena.ifsudestemg.daw.dao.AlunoDAO;
 import br.edu.barbacena.ifsudestemg.daw.modelo.Aluno;
 
-
-public class AdicionaAlunoServlet extends HttpServlet{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class AdicionaAlunoLogic implements Logica{
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	public void executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		PrintWriter out = response.getWriter();
 		
 		String nome = request.getParameter("nome");
@@ -55,7 +46,7 @@ public class AdicionaAlunoServlet extends HttpServlet{
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/aluno-adicionado.jsp");
 		rd.forward(request, response);
-				
+		
 	}
 
 }

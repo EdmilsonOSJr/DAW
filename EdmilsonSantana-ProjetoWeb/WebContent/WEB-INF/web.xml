@@ -16,7 +16,7 @@
   	<url-pattern>/ola</url-pattern>
   </servlet-mapping>
    
-   
+   <!-- 
    <servlet>
    	<servlet-name>adicionaAluno</servlet-name>
    	<servlet-class>br.edu.ifsudestemg.barbacena.servlet.AdicionaAlunoServlet</servlet-class>
@@ -26,6 +26,7 @@
    	<servlet-name>adicionaAluno</servlet-name>
    	<url-pattern>/adicionaAluno</url-pattern>
    </servlet-mapping>
+   -->
    
    <servlet>
    	<servlet-name>adicionaProfessor</servlet-name>

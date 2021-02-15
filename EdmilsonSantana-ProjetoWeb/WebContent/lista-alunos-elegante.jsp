@@ -21,6 +21,8 @@
 				<th>Email</th>
 				<th>Endereço</th>
 				<th>Data de Nacimento</th>
+				<th>Remover Aluno</th>
+				<th>Alterar Aluno</th>
 			</tr>
 		</thead>
 		<c:forEach var="aluno" items="${dao.listaAlunos()}" varStatus="id">
@@ -40,9 +42,18 @@
 				<td>
 					<fmt:formatDate value="${aluno.dataNascimento.time}" pattern="dd/MM/yyyy"/>
 				</td>
+				<td>
+					<a href="mvc?id=${aluno.id}&logica=RemoveAlunoLogic">Remover</a>
+				</td>
+				<td>
+					<a href="altera-aluno.jsp?id=${aluno.id}&nome=${aluno.nome}&email=${aluno.email}&endereco=${aluno.endereco}
+					&dataNascimento=<fmt:formatDate value="${aluno.dataNascimento.time}" pattern="dd/MM/yyyy"/>&logica=AlteraAlunoLogic">Alterar</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<a href="adiciona-aluno.jsp">Adicionar novo aluno</a>
 		
 	<c:import url="rodape.jsp"/>
 	
