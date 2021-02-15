@@ -49,7 +49,7 @@
 	
 	</table>
 	
-	<a href="lista-professores-elegante.jsp">Adicionar professor</a>
+	<a href="adiciona-professor.jsp">Adicionar professor</a>
 	
 	<c:import url="rodape.jsp"/>	
 </body>
