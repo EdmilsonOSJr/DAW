@@ -18,6 +18,8 @@
 			<th>Nome</th>
 			<th>Email</th>
 			<th>Grau de Formação</th>
+			<th>Remover Aluno</th>
+			<th>Alterar Aluno</th>
 		</tr>
 		
 		<c:forEach var="professor" items="${dao.listaProfessores()}" varStatus="id">
@@ -34,10 +36,21 @@
 					</c:choose>					
 				</td>
 				<td>${professor.grauFormacao}</td>
+				
+				<td> 
+					<a href="mvc?id=${professor.id}&logica=RemoveProfessorLogic">Remover</a>
+				</td>
+				<td> 
+					<a href="altera-professor.jsp?id=${professor.id}&nome=${professor.nome}
+					&email=${professor.email}&grauFormacao=${professor.grauFormacao}">Alterar</a>
+				</td>
 			</tr>
 		</c:forEach>
 	
 	</table>
+	
+	<a href="lista-professores-elegante.jsp">Adicionar professor</a>
+	
 	<c:import url="rodape.jsp"/>	
 </body>
 </html>

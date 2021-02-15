@@ -1,40 +1,37 @@
-package br.edu.ifsudestemg.barbacena.servlet;
-
-import java.io.IOException;
+package br.edu.ifsudestemg.barbacena.mvc.logica;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.barbacena.ifsudestemg.daw.dao.ProfessorDAO;
 import br.edu.barbacena.ifsudestemg.daw.modelo.Professor;
 
-public class AdicionaProfessorServlet extends HttpServlet{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class AlteraProfessorLogic implements Logica{
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		
+		Long id = Long.parseLong(request.getParameter("id"));
 		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String grauFormacao = request.getParameter("grauFormacao");
 		
+		
 		Professor professor = new Professor();
+		professor.setId(id);
 		professor.setNome(nome);
 		professor.setEmail(email);
 		professor.setGrauFormacao(grauFormacao);
 		
-		new ProfessorDAO().adiciona(professor);
+		ProfessorDAO dao = new ProfessorDAO();
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/professor-adicionado.jsp");
+		dao.altera(professor);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/lista-professores-elegante.jsp");
 		rd.forward(request, response);
 		
+		
 	}
+
 }
