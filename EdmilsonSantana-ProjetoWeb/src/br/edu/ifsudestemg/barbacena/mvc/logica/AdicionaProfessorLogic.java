@@ -1,6 +1,5 @@
 package br.edu.ifsudestemg.barbacena.mvc.logica;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +9,7 @@ import br.edu.barbacena.ifsudestemg.daw.modelo.Professor;
 public class AdicionaProfessorLogic implements Logica{
 
 	@Override
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		
 		String nome = request.getParameter("nome");
@@ -24,9 +23,8 @@ public class AdicionaProfessorLogic implements Logica{
 		
 		new ProfessorDAO().adiciona(professor);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/professor-adicionado.jsp");
-		rd.forward(request, response);
-		
+		return "professor-adicionado.jsp";
+				
 	}
 	
 }

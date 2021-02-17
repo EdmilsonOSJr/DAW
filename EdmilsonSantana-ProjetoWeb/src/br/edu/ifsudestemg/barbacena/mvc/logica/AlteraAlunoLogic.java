@@ -1,10 +1,9 @@
 package br.edu.ifsudestemg.barbacena.mvc.logica;
 
-import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +13,7 @@ import br.edu.barbacena.ifsudestemg.daw.modelo.Aluno;
 public class AlteraAlunoLogic implements Logica{
 
 	@Override
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		Aluno aluno = new Aluno();
 		long id = Long.parseLong(request.getParameter("id"));
@@ -32,10 +31,9 @@ public class AlteraAlunoLogic implements Logica{
 		AlunoDAO dao = new AlunoDAO();
 		dao.altera(aluno);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/lista-alunos-elegante.jsp");
-		rd.forward(request, response);
-		
 		System.out.println("Alterando aluno ..." + aluno.getNome());
+		
+		return "lista-alunos-elegante.jsp";
 	}
 	
 
