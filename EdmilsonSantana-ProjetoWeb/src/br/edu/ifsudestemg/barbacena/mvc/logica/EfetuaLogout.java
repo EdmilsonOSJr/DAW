@@ -2,15 +2,18 @@ package br.edu.ifsudestemg.barbacena.mvc.logica;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-public class PrimeiraLogica implements Logica{
+public class EfetuaLogout implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("Executando a lógica e redirecionando...");
+		HttpSession sessao = request.getSession(false);
 		
+		sessao.invalidate();
 		
-		return "primeira-logica.jsp";
+		return "login.jsp";
 	}
+
 }

@@ -6,6 +6,8 @@
 	br.edu.barbacena.ifsudestemg.daw.modelo.*"	
  %>
  
+ <%@ include file="autentificacao.jsp" %>
+ 
 <html>
 	<body>
 		<h1>Tabela de Alunos</h1>

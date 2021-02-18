@@ -9,7 +9,7 @@ import br.edu.barbacena.ifsudestemg.daw.modelo.Professor;
 public class RemoveProfessorLogic implements Logica{
 
 	@Override
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		Long id = Long.parseLong(request.getParameter("id"));
 		
@@ -20,7 +20,7 @@ public class RemoveProfessorLogic implements Logica{
 		
 		dao.remove(professor);
 		
-		response.sendRedirect("lista-professores-elegante.jsp");
+		return "lista-professores-elegante.jsp";
 	}
 
 }
