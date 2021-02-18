@@ -9,7 +9,7 @@ import br.edu.barbacena.ifsudestemg.daw.modelo.Aluno;
 public class RemoveAlunoLogic implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String id = request.getParameter("id");
 		Aluno aluno = new Aluno();
@@ -18,7 +18,7 @@ public class RemoveAlunoLogic implements Logica{
 		
 		dao.remove(aluno);
 		
-		return "lista-alunos-elegante.jsp";
+		response.sendRedirect("lista-alunos-elegante.jsp");
 	}
 	
 	

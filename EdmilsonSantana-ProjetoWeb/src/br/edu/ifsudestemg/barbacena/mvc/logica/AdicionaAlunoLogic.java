@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +16,7 @@ import br.edu.barbacena.ifsudestemg.daw.modelo.Aluno;
 public class AdicionaAlunoLogic implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		PrintWriter out = response.getWriter();
 		
@@ -31,6 +32,8 @@ public class AdicionaAlunoLogic implements Logica{
 			dataNascimento.setTime(date);
 		} catch (ParseException e) {
 			out.println("Erro de conversão da data");
+			return; // para a execução do método
+
 		}
 		
 		Aluno aluno = new Aluno();
@@ -41,7 +44,8 @@ public class AdicionaAlunoLogic implements Logica{
 		AlunoDAO dao = new AlunoDAO();
 		dao.adiciona(aluno);
 		
-		return "aluno-adicionado.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher("/aluno-adicionado.jsp");
+		rd.forward(request, response);
 		
 	}
 
