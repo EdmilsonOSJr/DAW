@@ -53,6 +53,7 @@
 		</c:forEach>
 	</table>
 	
+	<br/>
 	<a href="adiciona-aluno.jsp">Adicionar novo aluno</a>
 		
 	<c:import url="rodape.jsp"/>

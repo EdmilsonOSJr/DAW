@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<br />
+	<br />
 	<img src="imagens/rodape.png"/>
 </body>
 </html>

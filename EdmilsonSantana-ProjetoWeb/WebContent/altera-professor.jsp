@@ -13,7 +13,7 @@
 	<c:import url="cabecalho.jsp"></c:import>
 	
 	<form action="mvc" method="post">
-		Id: <input type="text" name="id" value="${param.id}"/><br />
+		Id: <input type="text" name="id" readonly = "readonly" value="${param.id}"/><br />
 		Nome: <input type="text" name="nome" value="${param.nome}"/><br />
 		Email: <input type="text" name="email" value="${param.email}" /><br />
 		Grau de Formacao: <input type="text" name="grauFormacao" value="${param.grauFormacao}" /><br />
