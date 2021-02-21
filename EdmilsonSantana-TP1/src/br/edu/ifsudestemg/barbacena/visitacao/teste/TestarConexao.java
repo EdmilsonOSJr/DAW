@@ -17,7 +17,7 @@ public class TestarConexao {
 		Calendar data = Calendar.getInstance();
 		
 		String d = "21/02/2021";
-		String h = "21:25:00";
+		String h = "09:15:00";
 		
 		Date df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(d+" "+h);
 		

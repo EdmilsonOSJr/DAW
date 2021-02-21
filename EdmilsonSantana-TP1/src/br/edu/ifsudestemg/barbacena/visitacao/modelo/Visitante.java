@@ -5,6 +5,7 @@ public class Visitante {
 	private String nome;
 	private String cpf;
 	private String tipoIngresso;
+	
 	public String getNome() {
 		return nome;
 	}
