@@ -35,12 +35,12 @@
 				<c:choose>
 					<c:when test="${param.codmuseu == 1}">
 						<td>Museu Municipal de Barbacena</td>
-						<c:set var="max" value="${5 - dao.agendamento(param.data, param.hora, param.codmuseu)}"></c:set>
+						<c:set var="max" value="${5 - dao.numPessoas(param.data, param.hora, param.codmuseu)}"></c:set>
 						<td>${max}</td>
 					</c:when>
 					<c:otherwise>
 						<td>Museu da Loucura</td>
-						<c:set var="max" value="${10 - dao.agendamento(param.data, param.hora, param.codmuseu)}"></c:set>
+						<c:set var="max" value="${10 - dao.numPessoas(param.data, param.hora, param.codmuseu)}"></c:set>
 						<td>${max}</td>		
 					</c:otherwise>
 				</c:choose>

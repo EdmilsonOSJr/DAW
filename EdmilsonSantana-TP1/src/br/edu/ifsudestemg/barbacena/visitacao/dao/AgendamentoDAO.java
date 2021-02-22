@@ -44,28 +44,52 @@ public class AgendamentoDAO {
 		
 	}
 		
-	public Agendamento recupera(String codConfirmacao) throws SQLException {
+	
+	public void remover(Agendamento agendamento) {
+		String sql = "delete from agendamento where codConfirmacao=?";
+		
+		
+		try(PreparedStatement stmt = connection.prepareStatement(sql) ){
+			stmt.setString(1, agendamento.getCodConfirmacao());
+			stmt.execute();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public Agendamento recupera(String codConfirmacao){
 		
 		String sql = "select * from agendamento where codConfirmacao=?";
 		
 		Calendar c = Calendar.getInstance();
-		Agendamento a = new Agendamento();
+		Agendamento a = null;
 		
-		PreparedStatement stmt = connection.prepareStatement(sql);
-		stmt.setString(1, codConfirmacao);
-		ResultSet rs = stmt.executeQuery();
-		
-		rs.next();
-		
-		a.setId(rs.getLong("id"));
-		a.setCodConfirmacao(rs.getString("codConfirmacao"));
-		a.setCodMuseu(rs.getLong("codMuseu"));
-		a.setEmail(rs.getString("email"));
-		Date d = new Date(rs.getDate("dataVisita").getTime());
-		c.setTime(d);
-		a.setDataVisitacao(c);
-		a.setHora(rs.getLong("hora"));
+		try (PreparedStatement stmt = connection.prepareStatement(sql);){
 			
+			stmt.setString(1, codConfirmacao);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				a = new Agendamento();
+				a.setId(rs.getLong("id"));
+				a.setCodConfirmacao(rs.getString("codConfirmacao"));
+				a.setCodMuseu(rs.getLong("codMuseu"));
+				a.setEmail(rs.getString("email"));
+				Date d = new Date(rs.getDate("dataVisita").getTime());
+				c.setTime(d);
+				a.setDataVisitacao(c);
+				a.setHora(rs.getLong("hora"));
+				
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return a;
 	}
 	
@@ -101,7 +125,7 @@ public class AgendamentoDAO {
 //		
 //	}
 	
-	public Long agendamento(String datatxt, Long hora,Long codmuseu){
+	public Long numPessoas(String datatxt, Long hora,Long codmuseu){
 		String sql = "select count(*) from agendamento inner join visitantes on agendamento.id=visitantes.idAgendamento "
 				+"where dataVisita=? and hora=? and codmuseu=?";
 			

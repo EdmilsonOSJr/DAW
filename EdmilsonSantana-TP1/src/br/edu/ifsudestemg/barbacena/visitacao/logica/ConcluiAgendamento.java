@@ -12,6 +12,7 @@ import java.security.MessageDigest;
 import br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.dao.VisitanteDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Agendamento;
+import br.edu.ifsudestemg.barbacena.visitacao.modelo.EmailAgendamento;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Visitante;
 
 public class ConcluiAgendamento implements Logica {
@@ -20,13 +21,14 @@ public class ConcluiAgendamento implements Logica {
 	public String service(HttpServletRequest request, HttpServletResponse response) {
 
 		Long numPessoas = Long.parseLong(request.getParameter("numPessoas"));
-		String email = request.getParameter("email");
+		String emailtxt = request.getParameter("email");
 		String datatxt = request.getParameter("data");
 		Long hora= Long.parseLong(request.getParameter("hora"));
 		Long codMuseu = Long.parseLong(request.getParameter("codMuseu"));
 		String nome;
 		String cpf;
 		String tipoIngresso;
+		String message , subject = "Agendamento realizado com sucesso.";
 
 		Date datad;
 
@@ -42,21 +44,24 @@ public class ConcluiAgendamento implements Logica {
 			AgendamentoDAO daoAgendamento = new AgendamentoDAO();
 			VisitanteDAO daoVisitante = new VisitanteDAO();
 			
-			String codConfirmacao = gerarHash(email);
+			String codConfirmacao = gerarHash(emailtxt);
 			
 			agendamento = new Agendamento();
 			agendamento.setCodConfirmacao(codConfirmacao);
 			agendamento.setCodMuseu(codMuseu);
 			agendamento.setDataVisitacao(datac);
 			agendamento.setHora(hora);
-			agendamento.setEmail(email);
+			agendamento.setEmail(emailtxt);
 			daoAgendamento.adiciona(agendamento);
+			message = String.format("O agendametno para o dia %s às %d horas foi realizado com sucesso. %d pessoas foram agendadas, sendo elas:\n", datatxt, 
+					hora,numPessoas);
 
 			for (int i = 1; i <= numPessoas; i++) {
 				nome = request.getParameter("nome"+i);
 				cpf = request.getParameter("cpf"+i);
 				tipoIngresso = request.getParameter("tipoIngresso"+i);
 
+				message+="\n\t"+cpf+"  "+nome;
 				visitante = new Visitante();
 				visitante.setNome(nome);
 				visitante.setCpf(cpf);
@@ -64,8 +69,13 @@ public class ConcluiAgendamento implements Logica {
 				visitante.setIdAgendamento(daoAgendamento.recupera(codConfirmacao).getId());
 
 				daoVisitante.adiciona(visitante);				
-
 			}
+
+			message+="\n\n"+codConfirmacao;
+			
+			EmailAgendamento email = new EmailAgendamento(emailtxt,subject,message);
+			email.enviar();
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
