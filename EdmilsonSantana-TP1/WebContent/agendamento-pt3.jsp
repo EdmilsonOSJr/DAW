@@ -14,9 +14,14 @@
 	<form action="mvc" method="get">
 		<c:forEach  var="cont" begin="1"  end="${param.numPessoas}">
 			
-			Nome: <input type="text"  name="nome${cont}"/>
-			cpf: <input type="text" name="cpf${cont}" />
-			Tipo do Ingresso: <input type="text" name="tipoIngresso${cont}" /><br />
+			Nome: <input type="text"  name="nome${cont}" required="required"/>
+			cpf: <input type="text" name="cpf${cont}" required="required"/>
+			Tipo do Ingresso: <select name="tipoIngresso${cont}">
+								  <option value="inteiro">Interiro</option>
+								  <option value="meia">Meia Entrada</option>
+								  <option value="isento">Isento</option>
+								  <option value="morador">Morador Cadastrados</option>
+								</select><br />
 		</c:forEach>
 		<input type="text" name="codMuseu" value="${param.codMuseu}" hidden="hidden"/>
 		<input type="text" name="data" value="${param.data}" hidden="hidden"/>

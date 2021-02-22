@@ -51,8 +51,8 @@
 	</table>
 	
 	<form action="mvc" method="get">
-		Número de pessoas: <input type="number"  min="1" max="${max}" name="numPessoas"/><br />
-		Email: <input type="text" name="email"/><br />
+		Número de pessoas: <input type="number"  min="1" max="${max}" name="numPessoas" required="required"/><br />
+		Email: <input type="email" name="email" required="required"/><br />
 		<input type="text" name="data" value="${param.data}" hidden="hidden"/>
 		<input type="text" name="hora" value="${param.hora}" hidden="hidden"/>
 		<input type="text" name="codMuseu" value="${param.codmuseu}" hidden="hidden" />

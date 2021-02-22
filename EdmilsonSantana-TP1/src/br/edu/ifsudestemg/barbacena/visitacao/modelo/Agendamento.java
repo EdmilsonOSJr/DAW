@@ -8,7 +8,8 @@ public class Agendamento {
 	private String cpf;
 	private String email;
 	private String codConfirmacao;
-	private Calendar dataHora;
+	private Calendar dataVisitacao;
+	private Long hora;
 	
 	
 	public Long getCodMuseu() {
@@ -30,17 +31,23 @@ public class Agendamento {
 	public void setCodConfirmacao(String codConfirmacao) {
 		this.codConfirmacao = codConfirmacao;
 	}
-	public Calendar getDataHora() {
-		return dataHora;
+	public Calendar getDataVisitacao() {
+		return dataVisitacao;
 	}
-	public void setDataHora(Calendar dataHora) {
-		this.dataHora = dataHora;
+	public void setDataVisitacao(Calendar dataHora) {
+		this.dataVisitacao = dataHora;
 	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String emailVisitante) {
 		this.email= emailVisitante;
+	}
+	public Long getHora() {
+		return hora;
+	}
+	public void setHora(Long hora) {
+		this.hora = hora;
 	}
 	
 	

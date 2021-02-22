@@ -22,7 +22,7 @@ public class ConcluiAgendamento implements Logica {
 		Long numPessoas = Long.parseLong(request.getParameter("numPessoas"));
 		String email = request.getParameter("email");
 		String datatxt = request.getParameter("data");
-		String horatxt = request.getParameter("hora");
+		Long hora= Long.parseLong(request.getParameter("hora"));
 		Long codMuseu = Long.parseLong(request.getParameter("codMuseu"));
 		String nome;
 		String cpf;
@@ -31,7 +31,7 @@ public class ConcluiAgendamento implements Logica {
 		Date datad;
 
 		try {
-			datad = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(datatxt + " " + horatxt);
+			datad = new SimpleDateFormat("yyyy-MM-dd").parse(datatxt);
 
 			Calendar datac = Calendar.getInstance();
 			datac.setTime(datad);
@@ -56,7 +56,8 @@ public class ConcluiAgendamento implements Logica {
 				agendamento.setCodConfirmacao(gerarHash(cpf));
 				agendamento.setCodMuseu(codMuseu);
 				agendamento.setCpf(cpf);
-				agendamento.setDataHora(datac);
+				agendamento.setDataVisitacao(datac);
+				agendamento.setHora(hora);
 				agendamento.setEmail(email);
 
 				daoVisitante.adiciona(visitante);

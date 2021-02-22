@@ -2,9 +2,6 @@ package br.edu.ifsudestemg.barbacena.visitacao.teste;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Agendamento;
@@ -14,12 +11,11 @@ public class TestarConexao {
 	public static void main(String[] args) throws ParseException, SQLException {
 
 		
-		Calendar data = Calendar.getInstance();
 		
-		String d = "21/02/2021";
-		String h = "09:15:00";
+	//	String d = "21/02/2021";
+	//	String h = "09:15:00";
 		
-		Date df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(d+" "+h);
+	//	Date df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(d+" "+h);
 		
 		
 		
@@ -32,7 +28,7 @@ public class TestarConexao {
 		System.out.println(g1.getCodMuseu());
 		System.out.println(g1.getCpf());
 		System.out.println(g1.getEmail());
-		System.out.println(g1.getDataHora().getTime());
+		System.out.println(g1.getDataVisitacao().getTime());
 		
 //		Visitante v1 = new Visitante();
 //		v1.setCpf("11774697661");
