@@ -22,7 +22,6 @@ public class ProcuraVaga implements Logica{
 		System.out.println(museutxt);
 		
 		Calendar data = Calendar.getInstance();
-		Calendar dataAtual = Calendar.getInstance();
 		
 		
 		if(datatxt.equals(""))

@@ -5,6 +5,7 @@ public class Visitante {
 	private String nome;
 	private String cpf;
 	private String tipoIngresso;
+	private Long idAgendamento;
 	
 	public String getNome() {
 		return nome;
@@ -23,6 +24,12 @@ public class Visitante {
 	}
 	public void setTipoIngresso(String tipoIngresso) {
 		this.tipoIngresso = tipoIngresso;
+	}
+	public Long getIdAgendamento() {
+		return idAgendamento;
+	}
+	public void setIdAgendamento(Long idAgendamento) {
+		this.idAgendamento = idAgendamento;
 	}
 	
 	

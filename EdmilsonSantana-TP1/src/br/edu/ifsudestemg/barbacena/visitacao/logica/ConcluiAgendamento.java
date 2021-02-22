@@ -41,6 +41,16 @@ public class ConcluiAgendamento implements Logica {
 
 			AgendamentoDAO daoAgendamento = new AgendamentoDAO();
 			VisitanteDAO daoVisitante = new VisitanteDAO();
+			
+			String codConfirmacao = gerarHash(email);
+			
+			agendamento = new Agendamento();
+			agendamento.setCodConfirmacao(codConfirmacao);
+			agendamento.setCodMuseu(codMuseu);
+			agendamento.setDataVisitacao(datac);
+			agendamento.setHora(hora);
+			agendamento.setEmail(email);
+			daoAgendamento.adiciona(agendamento);
 
 			for (int i = 1; i <= numPessoas; i++) {
 				nome = request.getParameter("nome"+i);
@@ -51,18 +61,9 @@ public class ConcluiAgendamento implements Logica {
 				visitante.setNome(nome);
 				visitante.setCpf(cpf);
 				visitante.setTipoIngresso(tipoIngresso);
+				visitante.setIdAgendamento(daoAgendamento.recupera(codConfirmacao).getId());
 
-				agendamento = new Agendamento();
-				agendamento.setCodConfirmacao(gerarHash(cpf));
-				agendamento.setCodMuseu(codMuseu);
-				agendamento.setCpf(cpf);
-				agendamento.setDataVisitacao(datac);
-				agendamento.setHora(hora);
-				agendamento.setEmail(email);
-
-				daoVisitante.adiciona(visitante);
-				daoAgendamento.adiciona(agendamento);
-				
+				daoVisitante.adiciona(visitante);				
 
 			}
 		} catch (ParseException e) {

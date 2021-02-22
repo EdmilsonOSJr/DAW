@@ -14,8 +14,6 @@
 	
 	<jsp:useBean id="dao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO"></jsp:useBean>
 	
-	${param.data} ${param.hora} ${param.codmuseu}
-
 
 	<table border="1">
 		<thead>

@@ -22,18 +22,17 @@ public class AgendamentoDAO {
 	
 	
 	public void adiciona(Agendamento agendamento) {
-		String sql = "insert into agendamento (codConfirmacao,codMuseu,cpf,"
-				+ "email,dataVisita,hora) values (?,?,?,?,?,?)";
+		String sql = "insert into agendamento (codConfirmacao,codMuseu,"
+				+ "email,dataVisita,hora) values (?,?,?,?,?)";
 		
 		
 		try(PreparedStatement stmt = connection.prepareStatement(sql)) {
 			stmt.setString(1, agendamento.getCodConfirmacao());
 			stmt.setLong(2, agendamento.getCodMuseu());
-			stmt.setString(3, agendamento.getCpf());
-			stmt.setString(4, agendamento.getEmail());
+			stmt.setString(3, agendamento.getEmail());
 			Date data = new Date(agendamento.getDataVisitacao().getTimeInMillis());
-			stmt.setDate(5, data);
-			stmt.setLong(6, agendamento.getHora());
+			stmt.setDate(4, data);
+			stmt.setLong(5, agendamento.getHora());
 			stmt.execute();
 			
 			
@@ -45,25 +44,28 @@ public class AgendamentoDAO {
 		
 	}
 		
-	public Agendamento recupera(String cpf) throws SQLException {
+	public Agendamento recupera(String codConfirmacao) throws SQLException {
 		
-		String sql = "select * from agendamento where cpf=?";
+		String sql = "select * from agendamento where codConfirmacao=?";
+		
 		Calendar c = Calendar.getInstance();
 		Agendamento a = new Agendamento();
+		
 		PreparedStatement stmt = connection.prepareStatement(sql);
-		stmt.setString(1, cpf);
+		stmt.setString(1, codConfirmacao);
 		ResultSet rs = stmt.executeQuery();
 		
-		while(rs.next()) {
-			a.setCodConfirmacao(rs.getString("codConfirmacao"));
-			a.setCodMuseu(rs.getLong("codMuseu"));
-			a.setCpf(rs.getString("cpf"));
-			a.setEmail(rs.getString("email"));
-			Date d = new Date(rs.getTimestamp("dataHora").getTime());
-			c.setTime(d);
-			//a.setDataHora(c);
+		rs.next();
+		
+		a.setId(rs.getLong("id"));
+		a.setCodConfirmacao(rs.getString("codConfirmacao"));
+		a.setCodMuseu(rs.getLong("codMuseu"));
+		a.setEmail(rs.getString("email"));
+		Date d = new Date(rs.getDate("dataVisita").getTime());
+		c.setTime(d);
+		a.setDataVisitacao(c);
+		a.setHora(rs.getLong("hora"));
 			
-		}
 		return a;
 	}
 	
@@ -100,10 +102,9 @@ public class AgendamentoDAO {
 //	}
 	
 	public Long agendamento(String datatxt, Long hora,Long codmuseu){
-		String sql = "select count(*) from agendamento where dataVisita=? and hora=? and codmuseu=?";
-		
-		
-		
+		String sql = "select count(*) from agendamento inner join visitantes on agendamento.id=visitantes.idAgendamento "
+				+"where dataVisita=? and hora=? and codmuseu=?";
+			
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			//Date data = new SimpleDateFormat("dd/MM/yyyy").parse(datatxt);
@@ -125,5 +126,7 @@ public class AgendamentoDAO {
 		return null;
 		
 	}
+	
+	
 	
 }

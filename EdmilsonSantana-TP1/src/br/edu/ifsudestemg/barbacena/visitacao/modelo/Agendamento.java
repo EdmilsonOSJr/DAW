@@ -5,13 +5,21 @@ import java.util.Calendar;
 public class Agendamento {
 	
 	private Long codMuseu;
-	private String cpf;
 	private String email;
 	private String codConfirmacao;
 	private Calendar dataVisitacao;
 	private Long hora;
+	private Long id;
 	
 	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Long getCodMuseu() {
 		return codMuseu;
 	}
@@ -19,12 +27,6 @@ public class Agendamento {
 		this.codMuseu = nomeMuseu;
 	}
 	
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpfVisitante) {
-		this.cpf = cpfVisitante;
-	}
 	public String getCodConfirmacao() {
 		return codConfirmacao;
 	}
