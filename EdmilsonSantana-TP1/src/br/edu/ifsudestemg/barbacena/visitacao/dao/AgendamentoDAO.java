@@ -126,7 +126,7 @@ public class AgendamentoDAO {
 //	}
 	
 	public Long numPessoas(String datatxt, Long hora,Long codmuseu){
-		String sql = "select count(*) from agendamento inner join visitantes on agendamento.id=visitantes.idAgendamento "
+		String sql = "select count(*) from agendamento inner join visitante on agendamento.id=visitante.idAgendamento "
 				+"where dataVisita=? and hora=? and codmuseu=?";
 			
 		try {

@@ -1,6 +1,7 @@
 package br.edu.ifsudestemg.barbacena.visitacao.modelo;
 
 import org.apache.commons.mail.Email;
+
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
@@ -58,7 +59,7 @@ public class EmailAgendamento {
 			email.setSmtpPort(465);
 			email.setAuthentication("controlevisitantesprefeiturabq@gmail.com", "Controle1234");
 			email.setSSLOnConnect(true);
-			email.setFrom("edmilsonosjr@gmail.com");
+			email.setFrom("controlevisitantesprefeiturabq@gmail.com");
 			email.setSubject(subject);
 			email.setMsg(message);
 			email.addTo(to);

@@ -20,7 +20,7 @@ public class RemoverAgendamento implements Logica{
 		AgendamentoDAO dao = new AgendamentoDAO();
 		dao.remover(agendamento);
 		
-		return "cancelamento-pt2.jsp";
+		return "cancelamento-pt1.jsp";
 	}
 	
 }

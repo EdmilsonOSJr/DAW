@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+
+
 <body>
+
+	<jsp:useBean id="dao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>	
+	
 	<form action="mvc" method="get">
 		Data: <input type="date" name="data" /><br />
 		Hora: <select name="hora">
@@ -22,9 +28,13 @@
 				  <option value="18">18</option>
 				  <option value="19">19</option>
 				</select><br />
-		Escolha o Museu que deseja visitar: <br />
-		<input type="radio" name="codmuseu" value="1" required="required"/>Museu Municipal de Barbacena<br />
-		<input type="radio" name="codmuseu" value="2" required="required"/>Museu da Loucura<br />
+				
+		Museu: <select name="codmuseu">
+					<c:forEach var="museu" items="${dao.lista()}">
+						  <option value="${museu.id}">${museu.nome}</option>			
+					</c:forEach>
+				</select><br />
+				
 		<input type="text" name="logica" value="ProcuraVaga" hidden="hidden"/><br />
 		<input type="submit" value="Pesquisar Vagas"/><br />
 	</form>

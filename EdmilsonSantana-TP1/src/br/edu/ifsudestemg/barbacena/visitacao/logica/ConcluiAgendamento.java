@@ -1,5 +1,6 @@
 package br.edu.ifsudestemg.barbacena.visitacao.logica;
 
+import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -7,12 +8,13 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.security.MessageDigest;
 
 import br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO;
+import br.edu.ifsudestemg.barbacena.visitacao.dao.PessoaDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.dao.VisitanteDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Agendamento;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.EmailAgendamento;
+import br.edu.ifsudestemg.barbacena.visitacao.modelo.Pessoa;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Visitante;
 
 public class ConcluiAgendamento implements Logica {
@@ -39,10 +41,12 @@ public class ConcluiAgendamento implements Logica {
 			datac.setTime(datad);
 
 			Visitante visitante;
+			Pessoa pessoa;
 			Agendamento agendamento;
 
 			AgendamentoDAO daoAgendamento = new AgendamentoDAO();
 			VisitanteDAO daoVisitante = new VisitanteDAO();
+			PessoaDAO daoPessoa = new PessoaDAO();
 			
 			String codConfirmacao = gerarHash(emailtxt);
 			
@@ -62,8 +66,14 @@ public class ConcluiAgendamento implements Logica {
 				tipoIngresso = request.getParameter("tipoIngresso"+i);
 
 				message+="\n\t"+cpf+"  "+nome;
+				
+				pessoa = new Pessoa();
+				pessoa.setCpf(cpf);
+				pessoa.setNome(nome);
+				
+				daoPessoa.adiciona(pessoa);
+				
 				visitante = new Visitante();
-				visitante.setNome(nome);
 				visitante.setCpf(cpf);
 				visitante.setTipoIngresso(tipoIngresso);
 				visitante.setIdAgendamento(daoAgendamento.recupera(codConfirmacao).getId());

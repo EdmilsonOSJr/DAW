@@ -17,6 +17,8 @@
 		class="br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO" />
 	<jsp:useBean id="daoVisitante"
 		class="br.edu.ifsudestemg.barbacena.visitacao.dao.VisitanteDAO" />
+	<jsp:useBean id="daoPessoa"
+		class="br.edu.ifsudestemg.barbacena.visitacao.dao.PessoaDAO" />
 
 	${daoAgendamento.recupera(param.codConfirmacao).id}
 
@@ -35,7 +37,7 @@
 
 			<tr>
 				<td>${visitante.cpf}</td>
-				<td>${visitante.nome}</td>
+				<td>${daoPessoa.recupera(visitante.cpf).nome}</td>
 				<td> <a href="mvc?cpf=${visitante.cpf}&codConfirmacao=${param.codConfirmacao}&logica=RemoverVisitante">Remover</a> </td>
 			</tr>
 			

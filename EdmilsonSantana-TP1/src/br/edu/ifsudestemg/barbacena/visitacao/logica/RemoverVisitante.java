@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO;
+import br.edu.ifsudestemg.barbacena.visitacao.dao.PessoaDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.dao.VisitanteDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Agendamento;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.EmailAgendamento;
@@ -35,6 +36,8 @@ public class RemoverVisitante implements Logica{
 		Agendamento agendamento = new Agendamento();
 		agendamento = daoAgen.recupera(cod);
 		
+		PessoaDAO daoPessoa = new PessoaDAO();
+		
 
 		List<Visitante> visitantes = new ArrayList<>();
 		visitantes = dao.lista(agendamento.getId());
@@ -48,7 +51,7 @@ public class RemoverVisitante implements Logica{
 					daoAgen.numPessoas(datatxt,hora,codMuseu));
 		
 		for(Visitante vis: visitantes) {
-			message+="\n\t"+vis.getCpf()+"   "+vis.getNome();
+			message+="\n\t"+vis.getCpf()+"   "+daoPessoa.recupera(vis.getCpf()).getNome();
 		}
 		
 		message+="\n\n"+cod;

@@ -2,17 +2,13 @@ package br.edu.ifsudestemg.barbacena.visitacao.modelo;
 
 public class Visitante {
 	
-	private String nome;
+	private Long id;
 	private String cpf;
 	private String tipoIngresso;
 	private Long idAgendamento;
 	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	
+	
 	public String getCpf() {
 		return cpf;
 	}
@@ -30,6 +26,12 @@ public class Visitante {
 	}
 	public void setIdAgendamento(Long idAgendamento) {
 		this.idAgendamento = idAgendamento;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	
