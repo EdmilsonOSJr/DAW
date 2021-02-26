@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	testndo essa merda.
+
+	
+	<form action="mvc" method="post">
+		Login: <input type="text" name="login"/><br />
+		Password: <input type="password" name="senha" /><br />
+		<input type="text" hidden="hidden" name="logica" value="EfetuarLogin"/>
+		<input type="submit" value="Enviar" />
+	
+	</form>
+
 </body>
 </html>
