@@ -6,6 +6,7 @@ public class Visitante {
 	private String cpf;
 	private String tipoIngresso;
 	private Long idAgendamento;
+	private boolean presenca;
 	
 	
 	
@@ -32,6 +33,12 @@ public class Visitante {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public boolean isPresenca() {
+		return presenca;
+	}
+	public void setPresenca(boolean presenca) {
+		this.presenca = presenca;
 	}
 	
 	

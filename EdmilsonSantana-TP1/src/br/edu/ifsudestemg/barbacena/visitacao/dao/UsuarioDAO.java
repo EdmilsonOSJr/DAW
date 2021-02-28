@@ -21,7 +21,7 @@ public class UsuarioDAO {
 	
 	
 	public void adiciona(Usuario usuario) {
-		String sql = "Insert into usuario (login,senha,permissao, idFuncionario) values(?,?,?,?)";
+		String sql = "Insert into usuario (login,senha,permissao,idFuncionario) values(?,?,?,?)";
 		
 		try {
 			 PreparedStatement stmt = connection.prepareStatement(sql);

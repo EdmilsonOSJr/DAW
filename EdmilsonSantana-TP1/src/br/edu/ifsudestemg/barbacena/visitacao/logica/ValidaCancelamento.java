@@ -1,5 +1,7 @@
 package br.edu.ifsudestemg.barbacena.visitacao.logica;
 
+import java.util.Calendar;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,14 +16,17 @@ public class ValidaCancelamento implements Logica{
 		String url = "cancelamento-pt2.jsp";
 		String codConfirmacao = request.getParameter("codConfirmacao");
 			
+		Calendar dataAtual = Calendar.getInstance();
+		
 		AgendamentoDAO dao = new AgendamentoDAO();
-		
-		
 		Agendamento agendamento = dao.recupera(codConfirmacao);
 		
 		if(agendamento == null)
 			url = "cancelamento-pt1.jsp";
-				
+		else 
+			if(agendamento.getDataVisitacao().compareTo(dataAtual)<0) // Só cancelamentos após a data atual podem ser cancelados.
+				url = "cancelamento-pt1.jsp";
+		
 		
 		return url;
 	}

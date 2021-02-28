@@ -11,9 +11,14 @@ public class TestarConexao {
 
 		
 		Calendar c = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		
-		System.out.println(df.format(c.getTime()));
+		c2.setTime(new SimpleDateFormat("dd/MM/yyyy").parse("28/02/2021"));
 		
+		System.out.println(df.format(c.getTime()));
+		System.out.println(df.format(c2.getTime()));
+		
+		System.out.println(c.compareTo(c2));
 	}
 }

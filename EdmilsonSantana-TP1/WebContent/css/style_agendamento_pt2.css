@@ -1,0 +1,22 @@
+@charset "ISO-8859-1";
+
+#formulario{
+	background-color: #A2B5CD;
+	border: solid 2px;
+	float: left;
+	left: 50%;
+	width : 500px;
+	height : 300px;
+	padding-top: 100px;
+	padding-right: 10px;
+	padding-left: 90px;
+	position: absolute;
+	margin-top: 50px;
+	transform: translateX(-50%);
+}
+
+body{
+	margin: 0;
+	background-color: #708090;
+	
+}

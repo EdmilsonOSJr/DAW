@@ -34,6 +34,21 @@ public class VisitanteDAO {
 
 	}
 	
+	public void atualiza(Visitante visitante) {
+		String sql = "update visitante set presenca=true where id=?";
+		
+		try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+			stmt.setLong(1, visitante.getId());
+			stmt.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	
 	public void remover(Visitante visitante) {
 		String sql = "delete from visitante where cpf=?";
@@ -65,6 +80,7 @@ public class VisitanteDAO {
 				visitante.setCpf(rs.getString("cpf"));
 				visitante.setIdAgendamento(rs.getLong("idAgendamento"));
 				visitante.setTipoIngresso(rs.getString("tipoIngresso"));
+				visitante.setPresenca(rs.getBoolean("presenca"));
 				visitantes.add(visitante);
 			}
 
@@ -93,6 +109,37 @@ public class VisitanteDAO {
 				visitante.setCpf(rs.getString("cpf"));
 				visitante.setIdAgendamento(rs.getLong("idAgendamento"));
 				visitante.setTipoIngresso(rs.getString("tipoIngresso"));
+				visitante.setPresenca(rs.getBoolean("presenca"));
+				visitantes.add(visitante);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return visitantes;
+	}
+	
+	
+	public List<Visitante> listaPresenca(Long id) {
+
+		String sql = "select * from visitante where idAgendamento=? and presenca=true";
+		Visitante visitante = null;
+		List<Visitante> visitantes = new ArrayList<Visitante>();
+
+		try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+			stmt.setLong(1, id);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+
+				visitante = new Visitante();
+				visitante.setId(rs.getLong("id"));
+				visitante.setCpf(rs.getString("cpf"));
+				visitante.setIdAgendamento(rs.getLong("idAgendamento"));
+				visitante.setTipoIngresso(rs.getString("tipoIngresso"));
+				visitante.setPresenca(rs.getBoolean("presenca"));
 				visitantes.add(visitante);
 			}
 

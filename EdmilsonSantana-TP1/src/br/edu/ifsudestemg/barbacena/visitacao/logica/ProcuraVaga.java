@@ -12,36 +12,32 @@ public class ProcuraVaga implements Logica{
 	@Override
 	public String service(HttpServletRequest request, HttpServletResponse response) {
 		
-		String datatxt = request.getParameter("data");
-		String horatxt = request.getParameter("hora");
-		String museutxt = request.getParameter("codmuseu");
+		String dataTxt = request.getParameter("data");
 		String url = "agendamendo-pt2.jsp";
+				
+		Calendar dataAtual = Calendar.getInstance();
+		Calendar dataFornecida = Calendar.getInstance();
 		
-		System.out.println(datatxt);
-		System.out.println(horatxt);
-		System.out.println(museutxt);
-		
-		Calendar data = Calendar.getInstance();
-		
-		
-		if(datatxt.equals(""))
-			url = "agendamento-pt1.jsp";
-		else {
+		try {
+			int mes = dataAtual.get(Calendar.MONTH)+1;
+			int ano = dataAtual.get(Calendar.YEAR);
+			int dia = dataAtual.get(Calendar.DAY_OF_MONTH);
 			
-			try {
-				data.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(datatxt));
+			if(!dataTxt.isEmpty()) {// Verifica se a data fornecida é nula.
+				dataFornecida.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(dataTxt));
+				dataAtual.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(ano+"-"+mes+"-"+dia));
 				
-				if(data.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY)
+				// Verifica se não é uma segunda-feira ou se a data é anteriror à data atual.
+				if(dataFornecida.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY || dataFornecida.compareTo(dataAtual)<0)
 					url = "agendamento-pt1.jsp";
-				
+			}
+			else 
+				url = "agendamento-pt1.jsp";
+					
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 			
-		}
-		System.out.println(data.getTime());
-		
-		
 		return url;
 	
 	}

@@ -23,8 +23,8 @@ public class ConcluiAgendamento implements Logica {
 	public String service(HttpServletRequest request, HttpServletResponse response) {
 
 		Long numPessoas = Long.parseLong(request.getParameter("numPessoas"));
-		String emailtxt = request.getParameter("email");
-		String datatxt = request.getParameter("data");
+		String emailTxt = request.getParameter("email");
+		String dataTxt = request.getParameter("data");
 		Long hora= Long.parseLong(request.getParameter("hora"));
 		Long codMuseu = Long.parseLong(request.getParameter("codMuseu"));
 		String nome;
@@ -35,7 +35,7 @@ public class ConcluiAgendamento implements Logica {
 		Date datad;
 
 		try {
-			datad = new SimpleDateFormat("yyyy-MM-dd").parse(datatxt);
+			datad = new SimpleDateFormat("yyyy-MM-dd").parse(dataTxt);
 
 			Calendar datac = Calendar.getInstance();
 			datac.setTime(datad);
@@ -48,16 +48,16 @@ public class ConcluiAgendamento implements Logica {
 			VisitanteDAO daoVisitante = new VisitanteDAO();
 			PessoaDAO daoPessoa = new PessoaDAO();
 			
-			String codConfirmacao = gerarHash(emailtxt);
+			String codConfirmacao = gerarHash(emailTxt);
 			
 			agendamento = new Agendamento();
 			agendamento.setCodConfirmacao(codConfirmacao);
 			agendamento.setCodMuseu(codMuseu);
 			agendamento.setDataVisitacao(datac);
 			agendamento.setHora(hora);
-			agendamento.setEmail(emailtxt);
+			agendamento.setEmail(emailTxt);
 			daoAgendamento.adiciona(agendamento);
-			message = String.format("O agendametno para o dia %s às %d horas foi realizado com sucesso. %d pessoas foram agendadas, sendo elas:\n", datatxt, 
+			message = String.format("O agendametno para o dia %s às %d horas foi realizado com sucesso. %d pessoas foram agendadas, sendo elas:\n", dataTxt, 
 					hora,numPessoas);
 
 			for (int i = 1; i <= numPessoas; i++) {
@@ -83,7 +83,7 @@ public class ConcluiAgendamento implements Logica {
 
 			message+="\n\n"+codConfirmacao;
 			
-			EmailAgendamento email = new EmailAgendamento(emailtxt,subject,message);
+			EmailAgendamento email = new EmailAgendamento(emailTxt,subject,message);
 			email.enviar();
 			
 		} catch (ParseException e) {

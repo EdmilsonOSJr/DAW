@@ -7,41 +7,53 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
 
 <body>
-	
 	<jsp:useBean id="dao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>	
 	
-	<c:import url="java.text.SimpleDateFormat" var="df"></c:import>
-	<c:import url="java.util.Calendar" var="calendar"></c:import>
+	<c:import url="cabecalho.jsp"></c:import>
 	
-		
-	<form action="mvc" method="get">
-		Data: <input type="date"  min="2021-02-25"  name="data" /><br />
-		Hora: <select name="hora">
-				  <option value="9">9</option>
-				  <option value="10">10</option>
-				  <option value="11">11</option>
-				  <option value="12">12</option>
-				  <option value="13">13</option>
-				  <option value="14">14</option>
-				  <option value="15">15</option>
-				  <option value="16">16</option>
-				  <option value="17">17</option>
-				  <option value="18">18</option>
-				  <option value="19">19</option>
-				</select><br />
+	<div class="position-relative">
+		<div class="position-absolute  start-50 translate-middle-x shadow p-3 mb-5 bg-body rounded w-25 mt-5">
+			<form action="mvc" method="post">
+			  <div class="mb-3">
+			    <label for="exampleInputEmail1" class="form-label">Data</label>
+			    <input type="date" class="form-control"  name="data">
+			  </div>
+			  <div class="mb-3">
+			  	<label for="exampleInputEmail1" class="form-label">Hora</label>
+				 <select name="hora" class="form-control">
+						  <option value="9">9</option>
+						  <option value="10">10</option>
+						  <option value="11">11</option>
+						  <option value="12">12</option>
+						  <option value="13">13</option>
+						  <option value="14">14</option>
+						  <option value="15">15</option>
+						  <option value="16">16</option>
+						  <option value="17">17</option>
+						  <option value="18">18</option>
+						  <option value="19">19</option>
+						</select>
+				</div>
 				
-		Museu: <select name="codmuseu">
-					<c:forEach var="museu" items="${dao.lista()}">
-						  <option value="${museu.id}">${museu.nome}</option>			
-					</c:forEach>
-				</select><br />
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">Museu</label>
+					 <select name="codmuseu" class="form-control">
+						<c:forEach var="museu" items="${dao.lista()}">
+							  <option value="${museu.id}">${museu.nome}</option>			
+						</c:forEach>
+					</select>
+				</div>
 				
-		<input type="text" name="logica" value="ProcuraVaga" hidden="hidden"/><br />
-		<input type="submit" value="Pesquisar Vagas"/><br />
-	</form>
+			 	 <input type="text" name="logica" value="ProcuraVaga" hidden="hidden"/>
+				  <button type="submit" class="btn btn-primary">Pesquisar Vagas</button>
+			</form>
+		</div>
+	</div>
+
 </body>
 </html>

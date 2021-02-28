@@ -8,10 +8,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
 
-	
+	<c:import url="cabecalho.jsp" />
 	
 	<jsp:useBean id="daoAgendamento"
 		class="br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO" />
@@ -20,36 +21,36 @@
 	<jsp:useBean id="daoPessoa"
 		class="br.edu.ifsudestemg.barbacena.visitacao.dao.PessoaDAO" />
 
-	${daoAgendamento.recupera(param.codConfirmacao).id}
 
-
-	<table border="1">
-		<thead>
-			<tr>
-				<th>cpf</th>
-				<th>nome</th>
-				<th>Remover Visitante</th>
-			</tr>
-		</thead>
-
-		<c:forEach var="visitante"
-			items="${daoVisitante.lista(daoAgendamento.recupera(param.codConfirmacao).id)}">
-
-			<tr>
-				<td>${visitante.cpf}</td>
-				<td>${daoPessoa.recupera(visitante.cpf).nome}</td>
-				<td> <a href="mvc?cpf=${visitante.cpf}&codConfirmacao=${param.codConfirmacao}&logica=RemoverVisitante">Remover</a> </td>
-			</tr>
-			
-
-		</c:forEach>
-
-
-
-	</table>
+	<div align="center" class="position-relative top-50 start-50 translate-middle-x">
+		
+		<table class="table">
+			<thead>
+				<tr align="center">
+					<th scope="col">cpf</th>
+					<th scope="col">nome</th>
+					<th scope="col">Remover Visitante</th>
+				</tr>
+			</thead>
 	
-	<a href="mvc?codConfirmacao=${param.codConfirmacao}&logica=RemoverAgendamento">Remover Todos</a>
-
+			<c:forEach var="visitante"
+				items="${daoVisitante.lista(daoAgendamento.recupera(param.codConfirmacao).id)}">
+	
+				<tr align="center">
+					<td scope="col">${visitante.cpf}</td>
+					<td scope="col">${daoPessoa.recupera(visitante.cpf).nome}</td>
+					<td scope="col"><a href="mvc?cpf=${visitante.cpf}&codConfirmacao=${param.codConfirmacao}&logica=RemoverVisitante"><button type="submit" class="btn btn-primary">Remover</button></a> </td>
+				</tr>
+			</c:forEach>
+	
+		</table><br /><br />
+		
+		<div class="position-relative start-50 translate-middle">	
+			<a href="mvc?codConfirmacao=${param.codConfirmacao}&logica=RemoverAgendamento"><button type="submit" class="btn btn-primary">Remover Todos</button></a>
+			<a href="cancelamento-pt1.jsp"><button type="submit" class="btn btn-primary">Cancelar</button></a>
+		</div>
+	</div>
+	
 
 </body>
 </html>

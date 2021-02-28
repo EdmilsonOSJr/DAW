@@ -5,8 +5,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-	menu do fun
+	
+	<br />
+	<br />
+	<div class="position-absolute bg-primary text-white" >
+				asdldfasdf	
+	</div>
+	
 </body>
 </html>

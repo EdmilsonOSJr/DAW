@@ -1,6 +1,7 @@
 package br.edu.ifsudestemg.barbacena.visitacao.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -99,7 +100,7 @@ public class FuncionarioDAO {
 	
 public Funcionario recuperarFuncionarioId(String id) {
 		
-		String sql = "select * from funcionario where cpf=?";
+		String sql = "select * from funcionario where id=?";
 		Funcionario funcionario= null;
 		
 		try {
@@ -114,6 +115,8 @@ public Funcionario recuperarFuncionarioId(String id) {
 				funcionario.setCpf(rs.getString("cpf"));
 				funcionario.setIdMuseu(rs.getLong("idMuseu"));
 			}
+			
+			System.out.println(funcionario.getIdMuseu());
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

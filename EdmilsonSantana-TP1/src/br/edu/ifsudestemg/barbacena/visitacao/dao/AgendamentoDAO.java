@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import br.edu.ifsudestemg.barbacena.visitacao.jdbc.ConnectionFactory;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Agendamento;
@@ -93,6 +95,8 @@ public class AgendamentoDAO {
 		return a;
 	}
 	
+	
+	
 //	
 //	public List<Agendamento> lista(){
 //		String sql = "select * from agendamento ";
@@ -151,6 +155,80 @@ public class AgendamentoDAO {
 		
 	}
 	
+	
+public List<Agendamento> recuperaPorData(String dataTxt, Long codMuseu){
+		
+		String sql = "select id from agendamento where dataVisita=? and codMuseu=?";
+		
+		List<Agendamento> agendamentos = new ArrayList<>();
+		
+		Calendar c1 = Calendar.getInstance();
+		
+		Agendamento a = null;
+		
+		try (PreparedStatement stmt = connection.prepareStatement(sql);){
+			
+			c1.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(dataTxt));
+			
+			Date data = new Date(c1.getTimeInMillis());
+			
+			stmt.setDate(1, data);
+			stmt.setLong(2, codMuseu);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				a = new Agendamento();
+				a.setId(rs.getLong("id"));
+				
+				agendamentos.add(a);
+			}
+		
+		} catch (SQLException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return agendamentos;
+	}
+
+
+public List<Agendamento> recuperaPorData(String dataTxt, Long hora, Long codMuseu){
+	
+	String sql = "select id from agendamento where dataVisita=? and codMuseu=? and hora=?";
+	
+	List<Agendamento> agendamentos = new ArrayList<>();
+	
+	Calendar c1 = Calendar.getInstance();
+	
+	Agendamento a = null;
+	
+	try (PreparedStatement stmt = connection.prepareStatement(sql);){
+		
+		c1.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(dataTxt));
+		
+		Date data = new Date(c1.getTimeInMillis());
+		
+		stmt.setDate(1, data);
+		stmt.setLong(2, codMuseu);
+		stmt.setLong(3, hora);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			a = new Agendamento();
+			a.setId(rs.getLong("id"));
+			
+			agendamentos.add(a);
+		}
+	
+	} catch (SQLException | ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	return agendamentos;
+}
 	
 	
 }

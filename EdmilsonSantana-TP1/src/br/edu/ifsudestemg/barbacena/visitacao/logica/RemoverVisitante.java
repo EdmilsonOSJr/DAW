@@ -23,7 +23,7 @@ public class RemoverVisitante implements Logica{
 		String cod = request.getParameter("codConfirmacao");
 		String subject = "Atualização de agendamento";
 		String message = null;
-		
+		String url = "cancelamento-pt2.jsp?codConfirmacao="+cod;
 		
 		VisitanteDAO dao = new VisitanteDAO();
 		Visitante visitante = new Visitante();
@@ -42,6 +42,11 @@ public class RemoverVisitante implements Logica{
 		List<Visitante> visitantes = new ArrayList<>();
 		visitantes = dao.lista(agendamento.getId());
 		
+		if(visitantes.size()==0) {
+			daoAgen.remover(agendamento);
+			url = "menu_funcionario.jsp";
+		}
+		
 		String datatxt = new SimpleDateFormat("yyyy-MM-dd").format(agendamento.getDataVisitacao().getTime());
 		Long hora = agendamento.getHora();
 		Long codMuseu = agendamento.getCodMuseu();
@@ -59,7 +64,7 @@ public class RemoverVisitante implements Logica{
 		EmailAgendamento email = new EmailAgendamento(emailtxt,subject,message);
 		email.enviar();
 		
-		return "cancelamento-pt2.jsp?codConfirmacao="+cod;
+		return url;
 		
 	}
 	
