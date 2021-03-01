@@ -8,6 +8,7 @@ import br.edu.ifsudestemg.barbacena.visitacao.dao.PermissaoDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.dao.UsuarioDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Funcionario;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Usuario;
+import br.edu.ifsudestemg.barbacena.visitacao.util.ValidaCPF;
 
 public class CadastroFuncionario implements Logica{
 
@@ -25,7 +26,11 @@ public class CadastroFuncionario implements Logica{
 		UsuarioDAO daoUsuario = new UsuarioDAO();
 		PermissaoDAO daoPermissao = new PermissaoDAO();
 		FuncionarioDAO daoFuncionario = new FuncionarioDAO();
-
+		
+		if(!ValidaCPF.valida(cpf)) {
+			return "cadastro_funcionario.jsp";
+		}
+		
 		// Não pode existir nem um usuário com os mesmo login e senha, nem um funcionário com o mesmo cpf.
 		if(daoUsuario.validaCredencial(login, senha)==null && daoFuncionario.recuperarFuncionario(cpf)==null) {
 			

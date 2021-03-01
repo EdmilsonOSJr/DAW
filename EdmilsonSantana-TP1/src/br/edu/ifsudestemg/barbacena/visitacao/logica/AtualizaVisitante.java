@@ -24,6 +24,8 @@ public class AtualizaVisitante implements Logica{
 		
 		dao.atualiza(visitante);
 		
+		
+		
 		return url;
 		
 	}

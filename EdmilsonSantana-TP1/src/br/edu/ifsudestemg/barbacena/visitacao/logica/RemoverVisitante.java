@@ -1,6 +1,7 @@
 package br.edu.ifsudestemg.barbacena.visitacao.logica;
 
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,8 @@ import br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.dao.PessoaDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.dao.VisitanteDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Agendamento;
-import br.edu.ifsudestemg.barbacena.visitacao.modelo.EmailAgendamento;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Visitante;
+import br.edu.ifsudestemg.barbacena.visitacao.util.EmailVisitacao;
 
 public class RemoverVisitante implements Logica{
 
@@ -65,7 +66,7 @@ public class RemoverVisitante implements Logica{
 		
 		message+="\n\n"+cod;
 		
-		EmailAgendamento email = new EmailAgendamento(emailtxt,subject,message);
+		EmailVisitacao email = new EmailVisitacao(emailtxt,subject,message);
 		email.enviar();
 		
 		return url;

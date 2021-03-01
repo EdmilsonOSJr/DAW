@@ -39,7 +39,7 @@ public class PessoaDAO {
 		
 		Pessoa a = null;
 		
-		try (PreparedStatement stmt = connection.prepareStatement(sql);){
+		try (PreparedStatement stmt = connection.prepareStatement(sql)){
 			
 			stmt.setString(1, cpf);
 			ResultSet rs = stmt.executeQuery();

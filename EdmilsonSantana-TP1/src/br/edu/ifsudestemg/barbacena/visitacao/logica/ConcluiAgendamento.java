@@ -1,6 +1,5 @@
 package br.edu.ifsudestemg.barbacena.visitacao.logica;
 
-import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,9 +12,11 @@ import br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.dao.PessoaDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.dao.VisitanteDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Agendamento;
-import br.edu.ifsudestemg.barbacena.visitacao.modelo.EmailAgendamento;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Pessoa;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Visitante;
+import br.edu.ifsudestemg.barbacena.visitacao.util.EmailVisitacao;
+import br.edu.ifsudestemg.barbacena.visitacao.util.GerarCodConfirmacao;
+import br.edu.ifsudestemg.barbacena.visitacao.util.ValidaCPF;
 
 public class ConcluiAgendamento implements Logica {
 
@@ -47,12 +48,21 @@ public class ConcluiAgendamento implements Logica {
 			VisitanteDAO daoVisitante = new VisitanteDAO();
 			PessoaDAO daoPessoa = new PessoaDAO();
 			
-			String codConfirmacao = Hash(emailTxt+dataTxt+hora+codMuseu);
+			String codConfirmacao = GerarCodConfirmacao.Hash(emailTxt+dataTxt+hora+codMuseu);
 			
 			Agendamento agendamento = daoAgendamento.recupera(codConfirmacao);
 			
 			if(agendamento!=null) // o email é único 
 				return "agendamento-pt1.jsp";
+			
+			
+			// valida o cpf informado
+			for (int i = 1; i <= numPessoas; i++) {
+				cpf = request.getParameter("cpf"+i);
+				if(!validaCpfVisitantes(cpf))
+					return "agendamento-pt1.jsp";
+			}
+			
 			
 			agendamento = new Agendamento();
 			agendamento.setCodConfirmacao(codConfirmacao);
@@ -68,7 +78,11 @@ public class ConcluiAgendamento implements Logica {
 				nome = request.getParameter("nome"+i);
 				cpf = request.getParameter("cpf"+i);
 				tipoIngresso = request.getParameter("tipoIngresso"+i);
-
+				
+				if(!ValidaCPF.valida(cpf)) {
+					return "agendamento-pt1.jsp";
+				}
+				
 				message+="\n\t"+cpf+"  "+nome;
 				
 				pessoa = daoPessoa.recupera(cpf);
@@ -90,7 +104,7 @@ public class ConcluiAgendamento implements Logica {
 
 			message+="\n\n"+codConfirmacao;
 			
-			EmailAgendamento email = new EmailAgendamento(emailTxt,subject,message);
+			EmailVisitacao email = new EmailVisitacao(emailTxt,subject,message);
 			email.enviar();
 			
 		} catch (ParseException e) {
@@ -99,19 +113,14 @@ public class ConcluiAgendamento implements Logica {
 			e.printStackTrace();
 		}
 		
+	
+		
 		return "agendamento-concluido.jsp";
 	}
 	
-
-	private String Hash(String senha) throws Exception {
-		MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-		byte hash[] = algorithm.digest(senha.getBytes("UTF-8"));
-
-		StringBuilder texto = new StringBuilder();
-		for (byte b : hash) {
-			texto.append(String.format("%02X", 0xFF & b));
-		}
-		return texto.toString();
+	private boolean validaCpfVisitantes(String cpf) {
+		
+		return ValidaCPF.valida(cpf);
 	}
 	
 }

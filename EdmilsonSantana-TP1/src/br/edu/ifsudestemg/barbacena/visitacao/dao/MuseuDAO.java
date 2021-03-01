@@ -35,7 +35,6 @@ public class MuseuDAO {
 				museu.setNome(rs.getString("nome"));
 				museu.setNumVisitantes(rs.getLong("numVisitantes"));
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,7 +64,6 @@ public class MuseuDAO {
 				
 				museus.add(museu);
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -20,8 +20,8 @@ public class PermissaoDAO {
 	public void adiciona(Permissao permissao) {
 		String sql = "Insert into permissao (nome) values(?)";
 
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
+		try (PreparedStatement stmt = connection.prepareStatement(sql)){
+			
 			stmt.setString(1, permissao.getNome());
 
 			stmt.execute();
@@ -37,8 +37,8 @@ public class PermissaoDAO {
 		String sql = "select * from permissao where nome=?";
 		Permissao permissao = null;
 
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
+		try (PreparedStatement stmt = connection.prepareStatement(sql)){
+			
 			stmt.setString(1, nome);
 			ResultSet rs = stmt.executeQuery();
 
@@ -62,8 +62,7 @@ public class PermissaoDAO {
 		String sql = "select * from permissao where id=?";
 		Permissao permissao = null;
 		
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
+		try (PreparedStatement stmt = connection.prepareStatement(sql)){
 			stmt.setLong(1, id);
 			ResultSet rs = stmt.executeQuery();
 			

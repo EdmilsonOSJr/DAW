@@ -22,11 +22,18 @@ public class AgendamentoDAO {
 		connection = ConnectionFactory.getConnection();
 	}
 	
+	public void closeConnection() {
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public void adiciona(Agendamento agendamento) {
 		String sql = "insert into agendamento (codConfirmacao,codMuseu,"
 				+ "email,dataVisita,hora) values (?,?,?,?,?)";
-		
 		
 		try(PreparedStatement stmt = connection.prepareStatement(sql)) {
 			stmt.setString(1, agendamento.getCodConfirmacao());
@@ -43,7 +50,6 @@ public class AgendamentoDAO {
 			e.printStackTrace();
 		}
 		
-		
 	}
 		
 	
@@ -54,7 +60,6 @@ public class AgendamentoDAO {
 		try(PreparedStatement stmt = connection.prepareStatement(sql) ){
 			stmt.setString(1, agendamento.getCodConfirmacao());
 			stmt.execute();
-		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,7 +74,7 @@ public class AgendamentoDAO {
 		Calendar c = Calendar.getInstance();
 		Agendamento a = null;
 		
-		try (PreparedStatement stmt = connection.prepareStatement(sql);){
+		try (PreparedStatement stmt = connection.prepareStatement(sql)){
 			
 			stmt.setString(1, codConfirmacao);
 			ResultSet rs = stmt.executeQuery();
@@ -86,7 +91,6 @@ public class AgendamentoDAO {
 				a.setHora(rs.getLong("hora"));
 				
 			}
-		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,7 +106,7 @@ public class AgendamentoDAO {
 		Calendar c = Calendar.getInstance();
 		Agendamento a = null;
 		
-		try (PreparedStatement stmt = connection.prepareStatement(sql);){
+		try (PreparedStatement stmt = connection.prepareStatement(sql)){
 			
 			stmt.setString(1, codConfirmacao);
 			stmt.setString(2, email);
@@ -120,7 +124,6 @@ public class AgendamentoDAO {
 				a.setHora(rs.getLong("hora"));
 				
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,45 +133,12 @@ public class AgendamentoDAO {
 	}
 	
 	
-	
-//	
-//	public List<Agendamento> lista(){
-//		String sql = "select * from agendamento ";
-//		List<Agendamento> agendamentos = new ArrayList<>();
-//		Agendamento agendamento = new Agendamento();
-//		Calendar datac = Calendar.getInstance();
-//		Date datad = new Date();
-//		
-//		try {
-//			PreparedStatement stmt = connection.prepareStatement(sql);
-//			ResultSet rs = stmt.executeQuery();
-//			while(rs.next()) {
-//				agendamento.setCodConfirmacao(rs.getString("codConfirmacao"));
-//				agendamento.setCodMuseu(rs.getLong("codMuseu"));
-//				agendamento.setCpf(rs.getString("cpf"));
-//				agendamento.setEmail(rs.getString("email"));
-//				datad.setTime(rs.getTimestamp("dataHora").getTime());
-//				datac.setTime(datad);
-//				agendamento.setDataHora(datac);
-//				agendamentos.add(agendamento);
-//			}
-//			
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return agendamentos;
-//		
-//		
-//	}
-	
 	public Long numPessoas(String datatxt, Long hora,Long codmuseu){
 		String sql = "select count(*) from agendamento inner join visitante on agendamento.id=visitante.idAgendamento "
 				+"where dataVisita=? and hora=? and codmuseu=?";
+		
+		try(PreparedStatement stmt = connection.prepareStatement(sql)) {
 			
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
 			//Date data = new SimpleDateFormat("dd/MM/yyyy").parse(datatxt);
 			Date data = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(datatxt).getTime());
 			stmt.setDate(1,data);
@@ -200,7 +170,7 @@ public List<Agendamento> recuperaPorData(String dataTxt, Long codMuseu){
 		
 		Agendamento a = null;
 		
-		try (PreparedStatement stmt = connection.prepareStatement(sql);){
+		try (PreparedStatement stmt = connection.prepareStatement(sql)){
 			
 			c1.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(dataTxt));
 			
@@ -217,7 +187,6 @@ public List<Agendamento> recuperaPorData(String dataTxt, Long codMuseu){
 				
 				agendamentos.add(a);
 			}
-		
 		} catch (SQLException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -255,7 +224,7 @@ public List<Agendamento> recuperaPorData(String dataTxt, Long hora, Long codMuse
 			
 			agendamentos.add(a);
 		}
-	
+		
 	} catch (SQLException | ParseException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

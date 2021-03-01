@@ -1,11 +1,11 @@
-package br.edu.ifsudestemg.barbacena.visitacao.modelo;
+package br.edu.ifsudestemg.barbacena.visitacao.util;
 
 import org.apache.commons.mail.Email;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
-public class EmailAgendamento {
+public class EmailVisitacao {
 	
 	private Email email ;
 	private String to;
@@ -45,7 +45,7 @@ public class EmailAgendamento {
 		this.message = message;
 	}
 
-	public EmailAgendamento(String to, String subject, String message) {
+	public EmailVisitacao(String to, String subject, String message) {
 		this.email = new SimpleEmail();
 		this.to = to;
 		this.message = message;

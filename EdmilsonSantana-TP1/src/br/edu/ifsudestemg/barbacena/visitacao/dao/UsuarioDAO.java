@@ -23,8 +23,8 @@ public class UsuarioDAO {
 	public void adiciona(Usuario usuario) {
 		String sql = "Insert into usuario (login,senha,permissao,idFuncionario) values(?,?,?,?)";
 		
-		try {
-			 PreparedStatement stmt = connection.prepareStatement(sql);
+		try (PreparedStatement stmt = connection.prepareStatement(sql)){
+			 
 			 stmt.setString(1,usuario.getLogin());
 			 stmt.setString(2, usuario.getSenha());
 			 stmt.setLong(3, usuario.getPermissao());
@@ -42,9 +42,8 @@ public class UsuarioDAO {
 	public void altera(Usuario usuario) {
 		String sql = "update usuario set senha=? where login=?";
 		
-		try {
+		try(PreparedStatement stmt = connection.prepareStatement(sql)) {
 			
-			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, usuario.getSenha());
 			stmt.setString(2, usuario.getLogin());
 			stmt.execute();
@@ -58,8 +57,8 @@ public class UsuarioDAO {
 	public void remover(String login) {
 		String sql = "delete from usuario where login=?";
 		
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
+		try (PreparedStatement stmt = connection.prepareStatement(sql)){
+			
 			stmt.setString(1, login);
 			stmt.execute();
 			
@@ -75,8 +74,7 @@ public class UsuarioDAO {
 		String sql = "select * from usuario where login=?";
 		Usuario usuario = null;
 		
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
+		try (PreparedStatement stmt = connection.prepareStatement(sql)){
 			stmt.setString(1, login);
 			ResultSet rs = stmt.executeQuery();
 			

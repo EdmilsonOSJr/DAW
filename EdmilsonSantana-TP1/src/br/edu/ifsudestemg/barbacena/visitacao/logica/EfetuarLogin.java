@@ -25,7 +25,7 @@ public class EfetuarLogin implements Logica{
 		
 		if(usuario != null) {
 			HttpSession sessao = request.getSession();
-			//sessao.setMaxInactiveInterval(2*60);
+			sessao.setMaxInactiveInterval(3*60);
 			sessao.setAttribute("status", true);
 			sessao.setAttribute("nome", login);
 						
