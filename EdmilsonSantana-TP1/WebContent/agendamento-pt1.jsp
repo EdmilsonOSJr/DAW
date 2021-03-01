@@ -12,8 +12,15 @@
 
 
 <body>
-	<jsp:useBean id="dao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>	
-	
+
+
+		<jsp:useBean id="dao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.FuncionarioDAO"></jsp:useBean>	
+		<jsp:useBean id="daoMuseu"
+		class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>
+		
+		<jsp:useBean id="daoPermissao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.PermissaoDAO"></jsp:useBean>
+		
+			
 	<c:import url="cabecalho.jsp"></c:import>
 	
 	<div class="position-relative">
@@ -41,12 +48,22 @@
 				</div>
 				
 				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Museu</label>
-					 <select name="codmuseu" class="form-control">
-						<c:forEach var="museu" items="${dao.lista()}">
-							  <option value="${museu.id}">${museu.nome}</option>			
-						</c:forEach>
-					</select>
+				
+					<c:choose>
+						<c:when test="${sessionScope.permissao != daoPermissao.recuperarPermissao('funcionario').id}">
+							<label for="exampleInputEmail1" class="form-label">Museu</label>
+							 <select name="codmuseu" class="form-control">
+								<c:forEach var="museu" items="${daoMuseu.lista()}">
+									  <option value="${museu.id}">${museu.nome}</option>			
+								</c:forEach>
+							</select>
+						</c:when>
+						
+						<c:otherwise>
+							<input name="codmuseu" value="${dao.recuperarFuncionarioId(sessionScope.idFuncionario).idMuseu}" hidden="hidden" />
+						</c:otherwise>
+						
+					</c:choose>
 				</div>
 				
 			 	 <input type="text" name="logica" value="ProcuraVaga" hidden="hidden"/>
@@ -54,6 +71,6 @@
 			</form>
 		</div>
 	</div>
-
+	<c:import url="rodape.jsp"></c:import>
 </body>
 </html>

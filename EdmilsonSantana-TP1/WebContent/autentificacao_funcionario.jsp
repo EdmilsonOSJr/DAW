@@ -11,13 +11,16 @@
 </head>
 <body>
 
+	<jsp:useBean id="daoPermissao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.PermissaoDAO"></jsp:useBean>
+	
+
 
 	<c:if test="${sessionScope.status != true}">
 		<jsp:forward page="login.jsp" />		
 	</c:if>
 	
 	
-	<c:if test="${sessionScope.permissao != 1 and sessionScope.permissao != 2}">
+	<c:if test="${sessionScope.permissao != daoPermissao.recuperarPermissao('admin').id and sessionScope.permissao != daoPermissao.recuperarPermissao('funcionario').id}">
 		<jsp:forward page="login.jsp" />		
 	</c:if>
 

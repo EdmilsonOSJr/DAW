@@ -14,57 +14,46 @@
 	
 	<c:import url="cabecalho.jsp"></c:import>
 	
-	<div class="position-relative mt-5">
-	
-		<div class="position-relative top-50 start-50 translate-middle-x">
-		
-			<form action="mvc" method="get" >
-				<c:forEach  var="cont" begin="1"  end="${param.numPessoas}">
-					<div class="row g-3" >
-						<div class="col-auto">
-						    <label for="exampleInputEmail1" class="form-label">Nome</label>
-					 	 </div>
-					 	 
-					 	 <div class="col-auto">
-						    <input type="text" class="form-control"  name="nome${cont}" required="required"/>
-					 	 </div>
-					 	 
-						<div class="col-auto">
-						    <label for="exampleInputEmail1" class="form-label">Cpf</label>
-					 	 </div>
-					 	 
-					 	  <div class="col-auto">
-						    <input type="text" class="form-control"  name="cpf${cont}" required="required"/>
-					 	 </div>
-					 	 
-						<div class="col-auto">
-						    <label for="exampleInputEmail1" class="form-label">Tipo do Ingresso</label>
-					 	 </div>
-					 	 
-					 	  <div class="col-auto">
-						    <select name="tipoIngresso${cont}" class="form-control">
-							  <option value="inteiro">Interiro</option>
-							  <option value="meia">Meia Entrada</option>
-							  <option value="isento">Isento</option>
-							  <option value="morador">Morador Cadastrados</option>
-							</select><br />
-					 	 </div>
+	<div  class="position-absolute mt-5 start-50 translate-middle-x w-auto">
+		<form action="mvc" method="get">
+			<c:forEach  var="cont" begin="1"  end="${param.numPessoas}">
+				<div class="row g-3 ">
+					<div class="col-auto ">
+					    <label for="exampleInputEmail1" class="form-label">Nome</label>
+					    <input type="text" class="form-control"  name="nome${cont}" required="required"/>
+				 	 </div>
+					<div class="col-auto">
+					    <label for="exampleInputEmail1" class="form-label">Cpf</label>
+					    <input type="text" class="form-control"  name="cpf${cont}" required="required"/>
+				 	 </div>
+				 	 
+					 <div class="col-auto">
+					    <label class="form-label">Tipo do Ingresso</label>
+					    <select name="tipoIngresso${cont}" class="form-control">
+						  <option value="inteiro">Interiro</option>
+						  <option value="meia">Meia Entrada</option>
+						  <option value="isento">Isento</option>
+						  <option value="morador">Morador Cadastrados</option>
+						</select><br />
 					</div>
-				</c:forEach>
-				
-				<input type="text" name="codMuseu" value="${param.codMuseu}" hidden="hidden"/>
-				<input type="text" name="data" value="${param.data}" hidden="hidden"/>
-				<input type="text" name="hora" value="${param.hora}" hidden="hidden"/>
-				<input type="text" name="email" value="${param.email}" hidden="hidden"/>
-				<input type="text" name="numPessoas" value="${param.numPessoas}" hidden="hidden"/>
-				<input type="text" name="logica" value="ConcluiAgendamento" hidden="hidden"/><br />
-				<button type="submit" class="btn btn-primary">Confirmar</button>
-			</form><br />
-		
-			<a href="agendamento-pt1.jsp"><button type="submit" class="btn btn-primary">Cancelar</button></a>	
+				</div>
+			</c:forEach>
 			
+			<input type="text" name="codMuseu" value="${param.codMuseu}" hidden="hidden"/>
+			<input type="text" name="data" value="${param.data}" hidden="hidden"/>
+			<input type="text" name="hora" value="${param.hora}" hidden="hidden"/>
+			<input type="text" name="email" value="${param.email}" hidden="hidden"/>
+			<input type="text" name="numPessoas" value="${param.numPessoas}" hidden="hidden"/>
+			<input type="text" name="logica" value="ConcluiAgendamento" hidden="hidden"/><br />
+			<button type="submit" class="btn btn-primary">Confirmar</button>
+		</form><br />
+		
+		<div class="mb-5">
+			<a href="agendamento-pt1.jsp" ><button type="submit" 
+				class="btn btn-primary">Cancelar</button></a>	
 		</div>
 	</div>
-			
+	
+	<c:import url="rodape.jsp"></c:import>
 </body>
 </html>

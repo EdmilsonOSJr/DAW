@@ -67,13 +67,13 @@
 					</form>
 					
 				</c:if>
-					<a href="agendamento-pt1.jsp"><button type="submit" class="btn btn-primary">Voltar</button></a>	
+					<a href="agendamento-pt1.jsp"><button type="submit" class="btn btn-primary">Cancelar</button></a>	
 		</div>
 			
 	</div>
 	
 		
-		
+	<c:import url="rodape.jsp"></c:import>
 	            
 </body>
 </html>

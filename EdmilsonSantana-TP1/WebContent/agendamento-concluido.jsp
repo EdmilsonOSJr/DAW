@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +10,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	DEU BOM.
+	
+	<c:import url="cabecalho.jsp"></c:import>
+	
+	<p>--> O agendamento para o dia ${param.data} às ${param.hora} horas foi concluído.
+	
+	<c:import url="rodape.jsp"></c:import>
+	
+	
 </body>
 </html>

@@ -44,12 +44,11 @@ public class PessoaDAO {
 			stmt.setString(1, cpf);
 			ResultSet rs = stmt.executeQuery();
 			
-			rs.next();
-			
-			a = new Pessoa();
-			a.setNome(rs.getString("nome"));
-			a.setCpf(rs.getString("cpf"));
-			
+			while(rs.next()) {
+				a = new Pessoa();
+				a.setNome(rs.getString("nome"));
+				a.setCpf(rs.getString("cpf"));
+			}
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

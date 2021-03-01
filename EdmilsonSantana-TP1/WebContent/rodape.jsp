@@ -9,10 +9,9 @@
 </head>
 <body>
 	
-	<br />
-	<br />
-	<div class="position-absolute bg-primary text-white" >
-				asdldfasdf	
+	<br>
+	<br>
+	<div class="bg-dark text-white position-fixed bottom-0 start-0 end-0 mt-5 pt-5" >
 	</div>
 	
 </body>

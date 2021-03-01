@@ -8,19 +8,29 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/style_menu_adm.css">
+<link rel="stylesheet" type="text/css" href="css/menu_adm.css">
 </head>
-<body>
-
+<body id="bd"> 
+	
 	<c:import url="cabecalho.jsp" />
 	
-	<div id="formulario" title="Menu do desenvolvedor">
-		<a href="agendamento-pt1.jsp" ><button>Agendamento</button></a><br /><br />
-		<a href="cancelamento-pt1.jsp" ><button>Cancelamento</button></a><br /><br />
-		<a href="cadastro_funcionario.jsp"><button>Cadastrar Funcionário</button></a><br /><br />
+	<div id="teste">
+		<ul class="nav flex-column">
+			<li class="nav-item"><a class="nav-link active text-dark" aria-current="page" href="agendamento-pt1.jsp">Agendamento</a></li>
+			
+			<li class="nav-item"><a class="nav-link active text-dark" href="cancelamento-pt1.jsp">Cancelamento</a></li>
+			
+			<li class="nav-item"><a class="nav-link active text-dark" href="cadastro_funcionario.jsp">Cadastrar Funcionário</a></li>
+			
+			<li class="nav-item"><a class="nav-link active text-dark" href="relatorio_por_dia.jsp">Relatório pessoas por dia</a></li>
+			
+			<li class="nav-item"><a class="nav-link active text-dark" href="relatorio_check_in.jsp">Relatório para check in</a></li>
+			
+		
+		</ul>
 	</div>
-	
-	
-	
+
+	<c:import url="rodape.jsp" />
+
 </body>
 </html>

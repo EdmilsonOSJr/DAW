@@ -42,13 +42,17 @@ public class ConcluiAgendamento implements Logica {
 
 			Visitante visitante;
 			Pessoa pessoa;
-			Agendamento agendamento;
 
 			AgendamentoDAO daoAgendamento = new AgendamentoDAO();
 			VisitanteDAO daoVisitante = new VisitanteDAO();
 			PessoaDAO daoPessoa = new PessoaDAO();
 			
 			String codConfirmacao = gerarHash(emailTxt);
+			
+			Agendamento agendamento = daoAgendamento.recupera(codConfirmacao);
+			
+			if(agendamento!=null) // o email é único 
+				return "agendamento-pt1.jsp";
 			
 			agendamento = new Agendamento();
 			agendamento.setCodConfirmacao(codConfirmacao);
@@ -67,11 +71,14 @@ public class ConcluiAgendamento implements Logica {
 
 				message+="\n\t"+cpf+"  "+nome;
 				
-				pessoa = new Pessoa();
-				pessoa.setCpf(cpf);
-				pessoa.setNome(nome);
+				pessoa = daoPessoa.recupera(cpf);
+				if(pessoa==null) {// cpf é único
+					pessoa = new Pessoa();
+					pessoa.setCpf(cpf);
+					pessoa.setNome(nome);
+					daoPessoa.adiciona(pessoa);
+				}
 				
-				daoPessoa.adiciona(pessoa);
 				
 				visitante = new Visitante();
 				visitante.setCpf(cpf);
@@ -87,10 +94,8 @@ public class ConcluiAgendamento implements Logica {
 			email.enviar();
 			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

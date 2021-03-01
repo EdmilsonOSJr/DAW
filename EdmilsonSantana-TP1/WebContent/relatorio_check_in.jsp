@@ -15,6 +15,11 @@
 
 	<jsp:useBean id="dao"
 		class="br.edu.ifsudestemg.barbacena.visitacao.dao.FuncionarioDAO"></jsp:useBean>
+	<jsp:useBean id="daoMuseu"
+		class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>
+
+	<jsp:useBean id="daoP" class="br.edu.ifsudestemg.barbacena.visitacao.dao.PermissaoDAO"></jsp:useBean>
+	
 
 	<c:import url="cabecalho.jsp"></c:import>
 
@@ -42,15 +47,32 @@
 							  <option value="19">19</option>
 							</select>
 				</div>
-					<input type="text" name="codMuseu" value="${dao.recuperarFuncionarioId(sessionScope.idFuncionario).idMuseu}" hidden="hidden" /> 
+				
+					<c:choose>
+					
+						<c:when test="${sessionScope.permissao == daoP.recuperarPermissao('admin').id}">
+							<div class="mb-3">
+								<label for="exampleInputEmail1" class="form-label">Museu</label>
+								 <select name="codMuseu" class="form-control">
+									<c:forEach var="museu" items="${daoMuseu.lista()}">
+										  <option value="${museu.id}">${museu.nome}</option>			
+									</c:forEach>
+								</select>
+							</div>
+						</c:when>
+						
+						<c:otherwise>
+							<input type="text" name="codMuseu" value="${dao.recuperarFuncionarioId(sessionScope.idFuncionario).idMuseu}" hidden="hidden" /> 
+						</c:otherwise>
+						
+					</c:choose>
+				
 					<input type="text" name="logica" value="RelatorioCheckIn" hidden="hidden" /> 
 					<button type="submit" class="btn btn-primary">Procurar</button><br/><br/>
 			</form>
-			
-			<a href="menu_funcionario.jsp"><button type="submit" class="btn btn-primary">Cancelar</button></a>
 		</div>
 	</div>
 
-
+	<c:import url="rodape.jsp"></c:import>
 </body>
 </html>

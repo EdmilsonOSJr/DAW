@@ -44,8 +44,8 @@
 						</c:forEach>
 					</c:forEach>				
 				</table><br /><br />
-				<a href="menu_funcionario.jsp"><button type="submit" class="btn btn-primary">Voltar</button></a>
+				<a href="relatorio_por_dia.jsp"><button type="submit" class="btn btn-primary">Voltar</button></a>
 			</div>
-
+		<c:import url="rodape.jsp"></c:import>
 </body>
 </html>

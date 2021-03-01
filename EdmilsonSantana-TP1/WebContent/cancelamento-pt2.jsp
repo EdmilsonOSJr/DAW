@@ -50,7 +50,6 @@
 			<a href="cancelamento-pt1.jsp"><button type="submit" class="btn btn-primary">Cancelar</button></a>
 		</div>
 	</div>
-	
-
+	<c:import url="rodape.jsp"></c:import>
 </body>
 </html>

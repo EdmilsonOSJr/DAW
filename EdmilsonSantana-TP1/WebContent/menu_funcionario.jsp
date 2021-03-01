@@ -16,15 +16,15 @@
 	
 	<c:import url="cabecalho.jsp" />
 	
-	<h1 align="center">Menu Funcionário</h1>
-	<hr>	
-	
-	<div id="formulario">
-		<a href="agendamento-pt1.jsp" ><button>agendamento</button></a><br /><br />
-		<a href="cancelamento-pt1.jsp" ><button>Cancelamento</button></a><br /><br />
-		<a href="relatorio_por_dia.jsp"><button>Relatório pessoas por dia</button></a><br /><br />
-		<a href="relatorio_check_in.jsp"><button>Relatório para check in</button></a><br /><br />
+	<div>
+		<ul class="nav flex-column">
+			<li class="nav-item"><a class="nav-link active text-dark" aria-current="page" href="agendamento-pt1.jsp">Agendamento</a></li>
+			<li class="nav-item"><a class="nav-link active text-dark" href="cancelamento-pt1.jsp">Cancelamento</a></li>
+			<li class="nav-item"><a class="nav-link active text-dark" href="relatorio_por_dia.jsp">Relatório pessoas por dia</a></li>
+			<li class="nav-item"><a class="nav-link active text-dark" href="relatorio_check_in.jsp">Relatório para check in</a></li>
+			
+		</ul>
 	</div>
-
+	<c:import url="rodape.jsp"></c:import>
 </body>
 </html>

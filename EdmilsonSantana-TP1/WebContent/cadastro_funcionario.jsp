@@ -17,9 +17,9 @@
 	
 	<jsp:useBean id="dao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>
 
-	<div class="position-relative">
+	<div class="position-relative mb-5">
 		
-		<div class="position-absolute top-50 start-50 translate-middle-x shadow p-3 mb-5 bg-body rounded w-50 mt-5">
+		<div class="position-absolute top-50 start-50 translate-middle-x shadow p-3 bg-body rounded w-50 mt-3">
 			<form action="mvc" method="get">
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Nome</label>
@@ -51,12 +51,11 @@
 				</div>
 	
 				<input type="text" name="logica" value="CadastroFuncionario" hidden="hidden"/>		
-				<button type="submit" class="btn btn-primary">Cadastrar</button><br /><br />			
+				<button type="submit" class="btn btn-primary mb-5">Cadastrar</button><br /><br />			
 			</form>
-			<a href="menu_adm.jsp" ><button type="submit" class="btn btn-primary">Cancelar</button></a>
-
 		</div>
 	</div>
 
+	<c:import url="rodape.jsp"></c:import>
 </body>
 </html>

@@ -27,9 +27,8 @@
 		  <input type="text" hidden="hidden" name="logica" value="EfetuarLogin"/>
 		  <button type="submit" class="btn btn-primary">Entrar</button><br /><br />
 		</form>
-		<a href="menu.jsp"><button type="submit" class="btn btn-primary">Voltar</button></a>
 	</div>
-	
+	<c:import url="rodape.jsp"></c:import>
 	
 </body>
 </html>

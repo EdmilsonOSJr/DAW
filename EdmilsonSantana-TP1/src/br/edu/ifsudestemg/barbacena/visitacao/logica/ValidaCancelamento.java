@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO;
+import br.edu.ifsudestemg.barbacena.visitacao.dao.FuncionarioDAO;
 import br.edu.ifsudestemg.barbacena.visitacao.modelo.Agendamento;
+import br.edu.ifsudestemg.barbacena.visitacao.modelo.Funcionario;
 
 public class ValidaCancelamento implements Logica{
 
@@ -15,17 +17,35 @@ public class ValidaCancelamento implements Logica{
 	
 		String url = "cancelamento-pt2.jsp";
 		String codConfirmacao = request.getParameter("codConfirmacao");
+		String idFuncionario = request.getParameter("idFuncionario");
 			
 		Calendar dataAtual = Calendar.getInstance();
 		
 		AgendamentoDAO dao = new AgendamentoDAO();
 		Agendamento agendamento = dao.recupera(codConfirmacao);
 		
+		System.out.println(idFuncionario);
 		if(agendamento == null)
 			url = "cancelamento-pt1.jsp";
-		else 
-			if(agendamento.getDataVisitacao().compareTo(dataAtual)<0) // Só cancelamentos após a data atual podem ser cancelados.
+		else {
+			
+			if(idFuncionario != null) {
+				
+				FuncionarioDAO daoFuncionario = new FuncionarioDAO();
+				Funcionario funcionario = daoFuncionario.recuperarFuncionarioId(idFuncionario);
+				
+				if(agendamento.getCodMuseu()!=funcionario.getIdMuseu())
+					url = "cancelamento-pt1.jsp";
+				
+			}
+			
+			
+			if(agendamento.getDataVisitacao().compareTo(dataAtual)<=0) // Só cancelamentos após a data atual podem ser cancelados.
 				url = "cancelamento-pt1.jsp";
+			
+			
+		}
+			
 		
 		
 		return url;

@@ -59,9 +59,9 @@
 
 		</table><br /><br />
 		
-		<a href="menu_funcionario.jsp"><button type="submit" class="btn btn-primary">Voltar</button></a>
+		<a href="relatorio_check_in.jsp"><button type="submit" class="btn btn-primary mb-4">Voltar</button></a>
 	</div>
 
-
+	<c:import url="rodape.jsp"></c:import>
 </body>
 </html>

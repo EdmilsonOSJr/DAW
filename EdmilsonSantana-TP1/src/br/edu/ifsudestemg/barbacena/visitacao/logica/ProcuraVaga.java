@@ -13,6 +13,7 @@ public class ProcuraVaga implements Logica{
 	public String service(HttpServletRequest request, HttpServletResponse response) {
 		
 		String dataTxt = request.getParameter("data");
+		Long hora = Long.parseLong(request.getParameter("hora"));
 		String url = "agendamendo-pt2.jsp";
 				
 		Calendar dataAtual = Calendar.getInstance();
@@ -30,9 +31,14 @@ public class ProcuraVaga implements Logica{
 				// Verifica se não é uma segunda-feira ou se a data é anteriror à data atual.
 				if(dataFornecida.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY || dataFornecida.compareTo(dataAtual)<0)
 					url = "agendamento-pt1.jsp";
+				
+				if(dataFornecida.compareTo(dataAtual)==0 && hora<Calendar.getInstance().get(Calendar.HOUR_OF_DAY))
+						url = "agendamento-pt1.jsp";
+						
 			}
 			else 
 				url = "agendamento-pt1.jsp";
+			
 					
 			} catch (ParseException e) {
 				e.printStackTrace();
