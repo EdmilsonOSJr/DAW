@@ -7,17 +7,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Relatório Check In</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
 
-	<jsp:useBean id="daoAgendamento"
-		class="br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO" />
-	<jsp:useBean id="daoVisitante"
-		class="br.edu.ifsudestemg.barbacena.visitacao.dao.VisitanteDAO" />
-	<jsp:useBean id="daoPessoa"
-		class="br.edu.ifsudestemg.barbacena.visitacao.dao.PessoaDAO" />
+	<jsp:useBean id="daoAgendamento" class="br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO" />
+	<jsp:useBean id="daoVisitante" class="br.edu.ifsudestemg.barbacena.visitacao.dao.VisitanteDAO" />
+	<jsp:useBean id="daoPessoa" class="br.edu.ifsudestemg.barbacena.visitacao.dao.PessoaDAO" />
 
 
 	<c:import url="cabecalho.jsp"></c:import>
@@ -44,7 +41,17 @@
 						<td>${visitante.cpf}</td>
 						<td>${daoPessoa.recupera(visitante.cpf).nome}</td>
 						<td>${visitante.tipoIngresso}</td>
-						<td>${visitante.presenca}</td>
+						<td>
+							<c:choose>
+								<c:when test="${visitante.presenca == true}">
+									Confirmado
+								</c:when>
+								
+								<c:otherwise>
+									Não Confirmado
+								</c:otherwise>
+							</c:choose>
+						</td>
 						<td>
 							<a href="mvc?logica=AtualizaVisitante&id=${visitante.id}
 							&hora=${param.hora}&data=${param.data}&codMuseu=${param.codMuseu}">

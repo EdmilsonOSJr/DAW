@@ -14,7 +14,6 @@ public class RemoverAgendamento implements Logica{
 		String codConfirmacao = request.getParameter("codConfirmacao");
 		
 		Agendamento agendamento = new Agendamento();
-		
 		agendamento.setCodConfirmacao(codConfirmacao);
 		
 		AgendamentoDAO dao = new AgendamentoDAO();

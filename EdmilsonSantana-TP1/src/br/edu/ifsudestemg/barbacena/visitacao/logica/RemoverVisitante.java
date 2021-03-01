@@ -25,35 +25,39 @@ public class RemoverVisitante implements Logica{
 		String message = null;
 		String url = "cancelamento-pt2.jsp?codConfirmacao="+cod;
 		
-		VisitanteDAO dao = new VisitanteDAO();
+		// Remove o visitante
+		VisitanteDAO daoVisitante = new VisitanteDAO();
 		Visitante visitante = new Visitante();
 		visitante.setCpf(cpf);
-		dao.remover(visitante);
+		daoVisitante.remover(visitante);
 		
 		
 		
-		AgendamentoDAO daoAgen = new AgendamentoDAO();
+		AgendamentoDAO daoAgendamento = new AgendamentoDAO();
 		Agendamento agendamento = new Agendamento();
-		agendamento = daoAgen.recupera(cod);
+		agendamento = daoAgendamento.recupera(cod);
+		
 		
 		PessoaDAO daoPessoa = new PessoaDAO();
 		
 
 		List<Visitante> visitantes = new ArrayList<>();
-		visitantes = dao.lista(agendamento.getId());
+		visitantes = daoVisitante.lista(agendamento.getId());
 		
+		// Caso o visitante removido seja o último o agendamento também é excluido.
 		if(visitantes.size()==0) {
-			daoAgen.remover(agendamento);
-			url = "menu_funcionario.jsp";
+			daoAgendamento.remover(agendamento);
+			url = "cancelamento-pt1.jsp";
 		}
 		
+		// Constroi mensagem.
 		String datatxt = new SimpleDateFormat("yyyy-MM-dd").format(agendamento.getDataVisitacao().getTime());
 		Long hora = agendamento.getHora();
 		Long codMuseu = agendamento.getCodMuseu();
 		String emailtxt = agendamento.getEmail();
 		
 		message = String.format("O agendamento do dia %s às %d horas foi atualizado, estando agora com %d visitantes, sendo eles:\n",datatxt,hora,
-					daoAgen.numPessoas(datatxt,hora,codMuseu));
+				daoAgendamento.numPessoas(datatxt,hora,codMuseu));
 		
 		for(Visitante vis: visitantes) {
 			message+="\n\t"+vis.getCpf()+"   "+daoPessoa.recupera(vis.getCpf()).getNome();

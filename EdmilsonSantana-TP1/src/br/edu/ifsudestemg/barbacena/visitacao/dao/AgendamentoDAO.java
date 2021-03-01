@@ -95,6 +95,40 @@ public class AgendamentoDAO {
 		return a;
 	}
 	
+	public Agendamento recupera(String codConfirmacao, String email){
+		
+		String sql = "select * from agendamento where codConfirmacao=? and email=?";
+		
+		Calendar c = Calendar.getInstance();
+		Agendamento a = null;
+		
+		try (PreparedStatement stmt = connection.prepareStatement(sql);){
+			
+			stmt.setString(1, codConfirmacao);
+			stmt.setString(2, email);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				a = new Agendamento();
+				a.setId(rs.getLong("id"));
+				a.setCodConfirmacao(rs.getString("codConfirmacao"));
+				a.setCodMuseu(rs.getLong("codMuseu"));
+				a.setEmail(rs.getString("email"));
+				Date d = new Date(rs.getDate("dataVisita").getTime());
+				c.setTime(d);
+				a.setDataVisitacao(c);
+				a.setHora(rs.getLong("hora"));
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+	
 	
 	
 //	

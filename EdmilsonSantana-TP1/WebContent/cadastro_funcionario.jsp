@@ -8,45 +8,45 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Cadastro Funcionário</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
 
 	<c:import url="cabecalho.jsp" />
 	
-	<jsp:useBean id="dao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>
+	<jsp:useBean id="daoMuseu" class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>
 
 	<div class="position-relative mb-5">
 		
 		<div class="position-absolute top-50 start-50 translate-middle-x shadow p-3 bg-body rounded w-50 mt-3">
-			<form action="mvc" method="get">
+			<form action="mvc" method="post">
 				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Nome</label>
+					<label class="form-label">Nome</label>
 					<input type="text" class="form-control"  name="nome" required="required">
 				</div>
 	
 				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Cpf</label>
+					<label class="form-label">Cpf</label>
 					<input type="text" class="form-control"  name="cpf" required="required">
 				</div>
 				
 				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Museu</label>
+					<label class="form-label">Museu</label>
 					<select name="codmuseu" class="form-control">
-						<c:forEach var="museu" items="${dao.lista()}">
+						<c:forEach var="museu" items="${daoMuseu.lista()}">
 							  <option value="${museu.id}">${museu.nome}</option>			
 						</c:forEach>
 					</select>
 				</div>
 				
 				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Definir login para funcionário</label>
+					<label class="form-label">Definir login para funcionário</label>
 					<input type="text" class="form-control"  name="login" required="required">
 				</div>
 				
 				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Definir senha para funcionário</label>
+					<label class="form-label">Definir senha para funcionário</label>
 					<input type="password" class="form-control"  name="senha" required="required">
 				</div>
 	

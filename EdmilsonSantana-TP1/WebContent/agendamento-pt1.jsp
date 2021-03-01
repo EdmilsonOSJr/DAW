@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Agendamento</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
@@ -14,10 +14,8 @@
 <body>
 
 
-		<jsp:useBean id="dao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.FuncionarioDAO"></jsp:useBean>	
-		<jsp:useBean id="daoMuseu"
-		class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>
-		
+		<jsp:useBean id="daoFuncionario" class="br.edu.ifsudestemg.barbacena.visitacao.dao.FuncionarioDAO"></jsp:useBean>	
+		<jsp:useBean id="daoMuseu" class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>
 		<jsp:useBean id="daoPermissao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.PermissaoDAO"></jsp:useBean>
 		
 			
@@ -27,11 +25,11 @@
 		<div class="position-absolute  start-50 translate-middle-x shadow p-3 mb-5 bg-body rounded w-25 mt-5">
 			<form action="mvc" method="post">
 			  <div class="mb-3">
-			    <label for="exampleInputEmail1" class="form-label">Data</label>
+			    <label class="form-label">Data</label>
 			    <input type="date" class="form-control"  name="data">
 			  </div>
 			  <div class="mb-3">
-			  	<label for="exampleInputEmail1" class="form-label">Hora</label>
+			  	<label class="form-label">Hora</label>
 				 <select name="hora" class="form-control">
 						  <option value="9">9</option>
 						  <option value="10">10</option>
@@ -51,7 +49,7 @@
 				
 					<c:choose>
 						<c:when test="${sessionScope.permissao != daoPermissao.recuperarPermissao('funcionario').id}">
-							<label for="exampleInputEmail1" class="form-label">Museu</label>
+							<label class="form-label">Museu</label>
 							 <select name="codmuseu" class="form-control">
 								<c:forEach var="museu" items="${daoMuseu.lista()}">
 									  <option value="${museu.id}">${museu.nome}</option>			
@@ -60,7 +58,7 @@
 						</c:when>
 						
 						<c:otherwise>
-							<input name="codmuseu" value="${dao.recuperarFuncionarioId(sessionScope.idFuncionario).idMuseu}" hidden="hidden" />
+							<input name="codmuseu" value="${daoFuncionario.recuperarFuncionarioId(sessionScope.idFuncionario).idMuseu}" hidden="hidden" />
 						</c:otherwise>
 						
 					</c:choose>

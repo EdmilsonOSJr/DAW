@@ -26,6 +26,7 @@ public class CadastroFuncionario implements Logica{
 		PermissaoDAO daoPermissao = new PermissaoDAO();
 		FuncionarioDAO daoFuncionario = new FuncionarioDAO();
 
+		// Não pode existir nem um usuário com os mesmo login e senha, nem um funcionário com o mesmo cpf.
 		if(daoUsuario.validaCredencial(login, senha)==null && daoFuncionario.recuperarFuncionario(cpf)==null) {
 			
 			Funcionario funcionario = new Funcionario();

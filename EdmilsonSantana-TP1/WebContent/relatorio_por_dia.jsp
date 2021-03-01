@@ -7,12 +7,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Relatório por Dia</title>
 <link rel="stylesheet" type="text/css" href="css/style_relatorio_dia.css" />
 </head>
 <body>
 						
-		<jsp:useBean id="dao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.FuncionarioDAO"></jsp:useBean>	
+		<jsp:useBean id="daoFuncionario" class="br.edu.ifsudestemg.barbacena.visitacao.dao.FuncionarioDAO"></jsp:useBean>	
 		<jsp:useBean id="daoMuseu" class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>
 		<jsp:useBean id="daoP" class="br.edu.ifsudestemg.barbacena.visitacao.dao.PermissaoDAO"></jsp:useBean>
 		
@@ -23,7 +23,7 @@
 		<div class="position-relative">
 			<div class="position-absolute top-50 start-50 translate-middle-x shadow p-3 mb-5 bg-body rounded w-50 mt-5">
 				
-				<form action="mvc" method="get">
+				<form action="mvc" method="post">
 				
 				<div class="mb-3">
 					<label class="form-label">Forneça a data para que a busca seja feita</label>
@@ -34,7 +34,7 @@
 					
 						<c:when test="${sessionScope.permissao == daoP.recuperarPermissao('admin').id}">
 							<div class="mb-3">
-								<label for="exampleInputEmail1" class="form-label">Museu</label>
+								<label class="form-label">Museu</label>
 								 <select name="codMuseu" class="form-control">
 									<c:forEach var="museu" items="${daoMuseu.lista()}">
 										  <option value="${museu.id}">${museu.nome}</option>			
@@ -44,7 +44,7 @@
 						</c:when>
 						
 						<c:otherwise>
-							<input type="text" name="codMuseu" value="${dao.recuperarFuncionarioId(sessionScope.idFuncionario).idMuseu}" hidden="hidden"/>
+							<input type="text" name="codMuseu" value="${daoFuncionario.recuperarFuncionarioId(sessionScope.idFuncionario).idMuseu}" hidden="hidden"/>
 						</c:otherwise>
 						
 					</c:choose>

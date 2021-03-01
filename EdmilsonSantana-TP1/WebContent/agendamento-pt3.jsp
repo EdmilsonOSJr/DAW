@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Agendamento</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
@@ -15,15 +15,15 @@
 	<c:import url="cabecalho.jsp"></c:import>
 	
 	<div  class="position-absolute mt-5 start-50 translate-middle-x w-auto">
-		<form action="mvc" method="get">
+		<form action="mvc" method="post">
 			<c:forEach  var="cont" begin="1"  end="${param.numPessoas}">
 				<div class="row g-3 ">
 					<div class="col-auto ">
-					    <label for="exampleInputEmail1" class="form-label">Nome</label>
+					    <label class="form-label">Nome</label>
 					    <input type="text" class="form-control"  name="nome${cont}" required="required"/>
 				 	 </div>
 					<div class="col-auto">
-					    <label for="exampleInputEmail1" class="form-label">Cpf</label>
+					    <label class="form-label">Cpf</label>
 					    <input type="text" class="form-control"  name="cpf${cont}" required="required"/>
 				 	 </div>
 				 	 

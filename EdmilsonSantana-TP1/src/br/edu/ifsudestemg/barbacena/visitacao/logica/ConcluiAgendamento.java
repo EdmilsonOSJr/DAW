@@ -47,7 +47,7 @@ public class ConcluiAgendamento implements Logica {
 			VisitanteDAO daoVisitante = new VisitanteDAO();
 			PessoaDAO daoPessoa = new PessoaDAO();
 			
-			String codConfirmacao = gerarHash(emailTxt);
+			String codConfirmacao = Hash(emailTxt+dataTxt+hora+codMuseu);
 			
 			Agendamento agendamento = daoAgendamento.recupera(codConfirmacao);
 			
@@ -103,7 +103,7 @@ public class ConcluiAgendamento implements Logica {
 	}
 	
 
-	private String gerarHash(String senha) throws Exception {
+	private String Hash(String senha) throws Exception {
 		MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
 		byte hash[] = algorithm.digest(senha.getBytes("UTF-8"));
 

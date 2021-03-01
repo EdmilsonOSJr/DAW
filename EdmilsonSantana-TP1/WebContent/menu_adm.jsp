@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Menu Admin</title>
 <link rel="stylesheet" type="text/css" href="css/menu_adm.css">
 </head>
 <body id="bd"> 

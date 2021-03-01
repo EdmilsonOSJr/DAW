@@ -38,7 +38,7 @@ public class RelatorioPorDia implements Logica{
 				
 				agendamentos = daoAgendamento.recuperaPorData(dataTxt,Long.parseLong(idMuseu));
 				
-				if(agendamentos.size()==0 || dataFornecida.compareTo(dataAtual)>0) 
+				if(agendamentos.size()==0) 
 					url = "relatorio_por_dia.jsp";
 				
 				

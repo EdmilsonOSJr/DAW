@@ -7,19 +7,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Cancelamento</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
 
 	<c:import url="cabecalho.jsp" />
 	
-	<jsp:useBean id="daoAgendamento"
-		class="br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO" />
-	<jsp:useBean id="daoVisitante"
-		class="br.edu.ifsudestemg.barbacena.visitacao.dao.VisitanteDAO" />
-	<jsp:useBean id="daoPessoa"
-		class="br.edu.ifsudestemg.barbacena.visitacao.dao.PessoaDAO" />
+	<jsp:useBean id="daoAgendamento" class="br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO" />
+	<jsp:useBean id="daoVisitante" class="br.edu.ifsudestemg.barbacena.visitacao.dao.VisitanteDAO" />
+	<jsp:useBean id="daoPessoa" class="br.edu.ifsudestemg.barbacena.visitacao.dao.PessoaDAO" />
 
 
 	<div align="center" class="position-relative top-50 start-50 translate-middle-x">

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Menu</title>
 <link rel="stylesheet" type="text/css" href="css/style_menu_funcionario.css">
 </head>
 <body>

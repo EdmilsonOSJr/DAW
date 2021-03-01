@@ -24,7 +24,6 @@ public class ValidaCancelamento implements Logica{
 		AgendamentoDAO dao = new AgendamentoDAO();
 		Agendamento agendamento = dao.recupera(codConfirmacao);
 		
-		System.out.println(idFuncionario);
 		if(agendamento == null)
 			url = "cancelamento-pt1.jsp";
 		else {

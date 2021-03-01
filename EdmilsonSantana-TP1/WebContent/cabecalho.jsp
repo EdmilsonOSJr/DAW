@@ -22,7 +22,8 @@
 		<ul class="nav nav-pills nav-fill">
 			
 			<c:choose>
-				<c:when test="${sessionScope.permissao == daoPermissao.recuperarPermissao('admin').id}">
+				<c:when test="${sessionScope.status == true and 
+						sessionScope.permissao == daoPermissao.recuperarPermissao('admin').id}">
 					<li class="nav-item">
 						<a class="nav-dark active text-white text-decoration-none" href="menu_adm.jsp" >
 							Menu
@@ -30,7 +31,8 @@
 					</li>
 				</c:when>
 				
-				<c:when test="${sessionScope.permissao == daoPermissao.recuperarPermissao('funcionario').id}">
+				<c:when test="${sessionScope.status == true and
+						sessionScope.permissao == daoPermissao.recuperarPermissao('funcionario').id}">
 					<li class="nav-item">
 						<a class="nav-dark active text-white text-decoration-none" href="menu_funcionario.jsp" >
 							Menu

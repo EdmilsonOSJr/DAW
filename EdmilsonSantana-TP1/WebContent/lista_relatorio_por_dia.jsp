@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Relatório por Dia</title>
 <link rel="stylesheet" type="text/css" href="css/style_lista_relatorio_dia.css">
 </head>
 <body>

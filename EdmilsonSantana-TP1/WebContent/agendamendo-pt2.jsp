@@ -8,16 +8,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Agendamento</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
 	
-	<jsp:useBean id="dao" class="br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO"></jsp:useBean>
+	<jsp:useBean id="daoAgendamento" class="br.edu.ifsudestemg.barbacena.visitacao.dao.AgendamentoDAO"></jsp:useBean>
 	<jsp:useBean id="daoMuseu" class="br.edu.ifsudestemg.barbacena.visitacao.dao.MuseuDAO"></jsp:useBean>
 	
 	<c:set var="nome" value="${daoMuseu.recupera(param.codmuseu).nome}"></c:set>
-	<c:set var="vagas" value="${daoMuseu.recupera(param.codmuseu).numVisitantes - dao.numPessoas(param.data, param.hora, param.codmuseu)}"></c:set>
+	<c:set var="vagas" value="${daoMuseu.recupera(param.codmuseu).numVisitantes - daoAgendamento.numPessoas(param.data, param.hora, param.codmuseu)}"></c:set>
 	
 	<c:import url="cabecalho.jsp"></c:import>
 	
@@ -49,9 +49,9 @@
 	
 		<div class="position-relative top-50 start-50 translate-middle-x shadow-sm p-3 mb-5 bg-body rounded w-25 p-3">
 			<c:if test="${vagas > 0}">
-					<form action="mvc" method="get" >				
+					<form action="mvc" method="post" >				
 					  <div class="mb-3">
-					    <label for="exampleInputEmail1" class="form-label">Número de Pessoas</label>
+					    <label class="form-label">Número de Pessoas</label>
 					    <input type="number" class="form-control"  min="1" max="${vagas}" value="1" name="numPessoas" required="required"/>
 					  </div>
 					  <div class="mb-3">
@@ -63,7 +63,7 @@
 						<input type="text" name="codMuseu" value="${param.codmuseu}" hidden="hidden" />
 						<input type="text" name="vagas" value="${vagas}" hidden="hidden">
 						<input type="text" name="logica" value="ValidaQtd" hidden="hidden"/>
-					  	<button type="submit" class="btn btn-primary">Entrar</button><br /><br />
+					  	<button type="submit" class="btn btn-primary">Agendar</button><br /><br />
 					</form>
 					
 				</c:if>
