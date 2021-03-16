@@ -11,92 +11,110 @@
 		
 		
 	<h:outputScript name="jsf.js" library="javax.faces" target="head"></h:outputScript>
+	<h:outputStylesheet library="css" name="style.css"/>
+	
 </h:head>
 <h:body>
 
-	<h:form id="cadastro">
-
-		<h2>
-			<h:outputText value="Novo Médico" rendered="#{empty medicoBean.medico.crm}" />
-			<h:outputText value="Editar Médico" rendered="#{not empty medicoBean.medico.crm}" />
-		</h2>
-
-		<h:panelGrid columns="2">
-
-			<h:outputLabel value="CRM" for="crm" />
-			<h:inputText id="crm" value="#{medicoBean.medico.crm}" />
-
-			<h:outputLabel value="Nome:" for="nome" />
-			<h:inputText id="nome" value="#{medicoBean.medico.nome}" />
-
-			<h:outputLabel value="Telefone:" for="tel" />
-			<h:inputText id="tel" value="#{medicoBean.medico.telefone}" />
-
-			<h:outputLabel value="Especialidade:" for="area" />
-			<h:inputTextarea id="area" value="#{medicoBean.medico.area}" />
-
-			<h:outputLabel value="Salário:" for="salario" />
-			<h:inputText id="salario" value="#{medicoBean.medico.salario}" />
-
-			<h:commandButton value="Gravar" action="#{medicoBean.grava}" >
-				<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
-			</h:commandButton>
-			
-			<h:commandButton value="Cancelar" action="#{medicoBean.cancela}" />
-
-		</h:panelGrid>
-
-	</h:form>
-
-	<h:form id="lista">
-		<h:dataTable value="#{medicoBean.medicos}" var="medico">
-
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-					#{medico.nome}
-				</h:column>
-
-			<h:column>
-				<f:facet name="header">CRM</f:facet>
-					#{medico.crm}
-				</h:column>
-
-			<h:column>
-				<f:facet name="header">Telefone</f:facet>
-					#{medico.telefone}
-				</h:column>
-
-			<h:column>
-				<f:facet name="header">Especialidade</f:facet>	
-					#{medico.area}		
-				</h:column>
-
-			<h:column>
-				<f:facet name="header">Salário</f:facet>
-					#{medico.salario}
-					
-					<f:facet name="footer">#{medicoBean.salarioTotal}</f:facet>
-			</h:column>
-
-
-			<h:column>
-				<f:facet name="header">Ações</f:facet>
-				<h:commandLink action="#{medicoBean.remove(medico)}" value="Remover">
-					<f:ajax render="@form"></f:ajax>
-				</h:commandLink>
+	<div id="cabecalho">
+		<h:graphicImage library="imagens" name="logoUPA.png" id="logoCompany"/>
+	</div>
+	
+	<div id="conteudo">
+	
+		<h:form id="cadastro">
+	
+			<h2>
+				<h:outputText value="Novo Médico" rendered="#{empty medicoBean.medico.crm}" />
+				<h:outputText value="Editar Médico" rendered="#{not empty medicoBean.medico.crm}" />
+			</h2>
 				
-				<h:commandLink value="Alterar">
-						<f:setPropertyActionListener value="#{medico}" target="#{medicoBean.medico}" />
+				<fieldset>
+					<legend>Dados do Médico</legend>
+	
+				<h:outputLabel value="CRM" for="crm" />
+				<h:inputText id="crm" value="#{medicoBean.medico.crm}" />
+	
+				<h:outputLabel value="Nome:" for="nome" />
+				<h:inputText id="nome" value="#{medicoBean.medico.nome}" />
+	
+				<h:outputLabel value="Telefone:" for="tel" />
+				<h:inputText id="tel" value="#{medicoBean.medico.telefone}" />
+	
+				<h:outputLabel value="Especialidade:" for="area" />
+				<h:inputTextarea id="area" value="#{medicoBean.medico.area}" />
+	
+				<h:outputLabel value="Salário:" for="salario" />
+				<h:inputText id="salario" value="#{medicoBean.medico.salario}" />
+	
+				<h:commandButton value="Gravar" action="#{medicoBean.grava}" >
+					<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
+				</h:commandButton>
+				
+				<h:commandButton value="Cancelar" action="#{medicoBean.cancela}" />
+	
+			</fieldset>
+				
+		</h:form>
+		
+		<h2>Listagem de Médicos</h2>
+		
+		<h:form id="lista">
+			<h:dataTable value="#{medicoBean.medicos}" var="medico" styleClass="dados" rowClasses="impar,par">
+	
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+						#{medico.nome}
+					</h:column>
+	
+				<h:column>
+					<f:facet name="header">CRM</f:facet>
+						#{medico.crm}
+					</h:column>
+	
+				<h:column>
+					<f:facet name="header">Telefone</f:facet>
+						#{medico.telefone}
+					</h:column>
+	
+				<h:column>
+					<f:facet name="header">Especialidade</f:facet>	
+						#{medico.area}		
+					</h:column>
+	
+				<h:column>
+					<f:facet name="header">Salário</f:facet>
+						#{medico.salario}
 						
-						<f:ajax render=":cadastro"></f:ajax>
-				</h:commandLink>
-			
-			</h:column>
-
-
-		</h:dataTable>
-	</h:form>
-
+						<f:facet name="footer">#{medicoBean.salarioTotal}</f:facet>
+				</h:column>
+	
+	
+				<h:column>
+				
+					<f:facet name="header">Ações</f:facet>
+					<h:commandLink value="Alterar" styleClass="btn">
+							<f:setPropertyActionListener value="#{medico}" target="#{medicoBean.medico}" />
+							
+							<f:ajax render=":cadastro"></f:ajax>
+					</h:commandLink>
+					
+					<h:commandLink action="#{medicoBean.remove(medico)}" value="Remover" styleClass="btn btn-danger">
+						<f:ajax render="@form"></f:ajax>
+					</h:commandLink>
+					
+				
+				</h:column>
+	
+	
+			</h:dataTable>
+		</h:form>
+	
+	</div>
+	
+	<div id="rodape">
+		Copyright 2010. Todos os Direitos reservados a Edmilson.
+	</div>
 
 </h:body>
 </html>
