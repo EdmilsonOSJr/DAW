@@ -37,9 +37,11 @@ public class LoginBean {
 		
 		if(loginValido) {
 			return "medico?faces-redirect=true";
-		} else 
+		} else {
+			
 			this.usuario = new Usuario();
 			return "login?faces-redirect=true";
+		}
 	}
 	
 	public String logout() {
