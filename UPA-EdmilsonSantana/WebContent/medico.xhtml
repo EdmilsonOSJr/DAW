@@ -8,10 +8,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Sistema de Gerenciamento de Unidades de Pronto
 		Atendimento</title>
+		
+		
+	<h:outputScript name="jsf.js" library="javax.faces" target="head"></h:outputScript>
 </h:head>
 <h:body>
 
-	<h:form>
+	<h:form id="cadastro">
 
 		<h2>
 			<h:outputText value="Novo Médico" rendered="#{empty medicoBean.medico.crm}" />
@@ -35,14 +38,17 @@
 			<h:outputLabel value="Salário:" for="salario" />
 			<h:inputText id="salario" value="#{medicoBean.medico.salario}" />
 
-			<h:commandButton value="Gravar" action="#{medicoBean.grava}" />
+			<h:commandButton value="Gravar" action="#{medicoBean.grava}" >
+				<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
+			</h:commandButton>
+			
 			<h:commandButton value="Cancelar" action="#{medicoBean.cancela}" />
 
 		</h:panelGrid>
 
 	</h:form>
 
-	<h:form>
+	<h:form id="lista">
 		<h:dataTable value="#{medicoBean.medicos}" var="medico">
 
 			<h:column>
@@ -75,10 +81,14 @@
 
 			<h:column>
 				<f:facet name="header">Ações</f:facet>
-				<h:commandLink action="#{medicoBean.remove(medico)}" value="Remover" />
+				<h:commandLink action="#{medicoBean.remove(medico)}" value="Remover">
+					<f:ajax render="@form"></f:ajax>
+				</h:commandLink>
 				
 				<h:commandLink value="Alterar">
 						<f:setPropertyActionListener value="#{medico}" target="#{medicoBean.medico}" />
+						
+						<f:ajax render=":cadastro"></f:ajax>
 				</h:commandLink>
 			
 			</h:column>
