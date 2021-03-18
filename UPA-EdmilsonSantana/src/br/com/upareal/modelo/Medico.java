@@ -1,18 +1,39 @@
 package br.com.upareal.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Medico {
 	
 	@Id
+	@SequenceGenerator(
+			name="medico_id",
+			sequenceName="medico_seq",
+			allocationSize=1)
+
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "medico_seq")
+	private Long id;
+	
+	@Column(unique = true)
 	private String crm;
 	private String nome;
 	private String telefone;
 	private String area;
 	private Double salario;
 	
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getCrm() {
 		return crm;
 	}

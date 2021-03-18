@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/_template.xhtml">
+
+	<ui:define name="corpo">
+
+		<h:outputScript name="jsf.js" library="javax.faces" target="head"></h:outputScript>
+		
+		<h:form id="cadastro">
+
+			<fieldset>
+				<legend>Dados do Paciente</legend>
+
+				<h:outputLabel value="Cpf" for="cpf" />
+				<h:inputText id="cpf" value="#{pacienteBean.paciente.cpf}" />
+
+				<h:outputLabel value="Nome:" for="nome" />
+				<h:inputText id="nome" value="#{pacienteBean.paciente.nome}" />
+
+				<h:outputLabel value="Telefone:" for="tel" />
+				<h:inputText id="tel" value="#{pacienteBean.paciente.telefone}" />
+
+				<h:outputLabel value="Endereço:" for="endereco" />
+				<h:inputTextarea id="endereco" value="#{pacienteBean.paciente.endereco}" />
+
+				<h:outputLabel value="Sexo" for="sexo" />
+				<h:inputText id="sexo" value="#{pacienteBean.paciente.sexo}" />
+
+				<h:outputLabel value="Data de Nacimento" for="dataN" />
+				<h:inputText id="dataN" value="#{pacienteBean.paciente.dataNasc.time}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+				</h:inputText>
+			</fieldset>
+				
+				<fieldset>
+					<legend>Dados do atendimento</legend>
+					<h:outputLabel value="Medico:" />
+					<h:selectOneMenu value="#{pacienteBean.idMedico}">
+						<f:selectItems value="#{medicoBean.medicos}" var="medico"
+						itemValue="#{medico.id}" itemLabel="#{medico.nome}"/>
+					</h:selectOneMenu>
+					
+					<h:outputLabel value="Receita:" for="receita" />
+					<h:inputTextarea id="receita" value="#{pacienteBean.atendimento.receita}"/>
+	
+					<h:outputLabel value="Recomendações:" for="recomendacoes" />
+					<h:inputTextarea id="recomendacoes" value="#{pacienteBean.atendimento.recomendacoes}" />
+					
+					<h:outputLabel value="Data" for="data" />
+					<h:inputText id="data" value="#{pacienteBean.atendimento.data.time}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+					</h:inputText>
+					
+					 <h:commandButton action="#{pacienteBean.guardaAtendimento}" value="Guardar Atendimento" />
+					
+				</fieldset>					
+				
+				
+				<h:dataTable value="#{pacienteBean.paciente.atendimentos}" var="atendimento" styleClass="dados" rowClasses="impar,par">
+				<h:column>
+					<f:facet name="header">Medico</f:facet>
+					#{atendimento.medico.nome}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Paciente</f:facet>
+					#{atendimento.paciente.nome}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Receita</f:facet>
+					#{atendimento.receita}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Recomendações</f:facet>
+					#{atendimento.recomendacoes}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Data</f:facet>
+					#{atendimento.data.time}
+					
+				</h:column>
+			</h:dataTable>
+				
+				
+				<h:commandButton value="Gravar" action="#{pacienteBean.gravar}">
+					<f:ajax execute="@form" render=":cadastro"></f:ajax>
+				</h:commandButton>
+			
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,9 +1,13 @@
 package br.com.upareal.modelo;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -18,11 +22,22 @@ public class Paciente {
 	private String sexo;
 	
 	@Temporal(TemporalType.DATE)
-	private Calendar dataNasc;
+	private Calendar dataNasc = Calendar.getInstance();
+	
+	
+	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="paciente")
+	private List<Atendimento> atendimentos = new ArrayList<>();
+	
 	
 	
 	public String getCpf() {
 		return cpf;
+	}
+	public List<Atendimento> getAtendimentos() {
+		return atendimentos;
+	}
+	public void setAtendimentos(List<Atendimento> atendimentos) {
+		this.atendimentos = atendimentos;
 	}
 	public void setCpf(String cpf) {
 		this.cpf = cpf;

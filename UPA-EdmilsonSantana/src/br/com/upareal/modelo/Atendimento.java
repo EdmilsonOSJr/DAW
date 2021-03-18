@@ -2,12 +2,11 @@ package br.com.upareal.modelo;
 
 import java.util.Calendar;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,16 +24,16 @@ public class Atendimento {
 	private Long id;
 	
 	@Temporal(TemporalType.DATE)
-	private Calendar data;
+	private Calendar data = Calendar.getInstance();
 	
 	private String receita;
 	private String recomendacoes;
 	
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Medico medico;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Paciente paciente;
 	
 	
