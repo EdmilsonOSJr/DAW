@@ -28,9 +28,13 @@
 				<h:outputLabel value="Endereço:" for="endereco" />
 				<h:inputTextarea id="endereco" value="#{pacienteBean.paciente.endereco}" />
 
-				<h:outputLabel value="Sexo" for="sexo" />
-				<h:inputText id="sexo" value="#{pacienteBean.paciente.sexo}" />
-
+				<h:outputLabel value="Sexo:" for="sexo"/>
+				<h:selectOneMenu id="sexo" value="#{pacienteBean.paciente.sexo}">
+					<f:selectItem itemLabel="masculino" itemValue="masculino" />	
+					<f:selectItem itemLabel="feminino" itemValue="feminino" />	
+				</h:selectOneMenu>
+			
+				
 				<h:outputLabel value="Data de Nacimento" for="dataN" />
 				<h:inputText id="dataN" value="#{pacienteBean.paciente.dataNasc.time}" >
 					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
