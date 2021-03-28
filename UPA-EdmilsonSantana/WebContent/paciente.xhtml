@@ -3,97 +3,112 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/_template.xhtml">
 
 	<ui:define name="corpo">
 
 		<h:outputScript name="jsf.js" library="javax.faces" target="head"></h:outputScript>
-		
+
 		<h:form id="cadastro">
-
-			<fieldset>
-				<legend>Dados do Paciente</legend>
-
-				<h:outputLabel value="Cpf" for="cpf" />
-				<h:inputText id="cpf" value="#{pacienteBean.paciente.cpf}" />
-
-				<h:outputLabel value="Nome:" for="nome" />
-				<h:inputText id="nome" value="#{pacienteBean.paciente.nome}" />
-
-				<h:outputLabel value="Telefone:" for="tel" />
-				<h:inputText id="tel" value="#{pacienteBean.paciente.telefone}" />
-
-				<h:outputLabel value="Endereço:" for="endereco" />
-				<h:inputTextarea id="endereco" value="#{pacienteBean.paciente.endereco}" />
-
-				<h:outputLabel value="Sexo:" for="sexo"/>
-				<h:selectOneMenu id="sexo" value="#{pacienteBean.paciente.sexo}">
-					<f:selectItem itemLabel="masculino" itemValue="masculino" />	
-					<f:selectItem itemLabel="feminino" itemValue="feminino" />	
-				</h:selectOneMenu>
+					
+			<p:messages styleClass="erros"/>
 			
-				
-				<h:outputLabel value="Data de Nacimento" for="dataN" />
-				<h:inputText id="dataN" value="#{pacienteBean.paciente.dataNasc.time}" >
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-				</h:inputText>
-			</fieldset>
-				
-				<fieldset>
-					<legend>Dados do atendimento</legend>
-					<h:outputLabel value="Medico:" />
-					<h:selectOneMenu value="#{pacienteBean.idMedico}">
-						<f:selectItems value="#{medicoBean.medicos}" var="medico"
-						itemValue="#{medico.id}" itemLabel="#{medico.nome}"/>
-					</h:selectOneMenu>
+			<p:tabView>
+
+				<p:tab title="Dados do Paciente">
+					<p:fieldset legend="Dados do Paciente">
+
+						<h:outputLabel value="Cpf" for="cpf" />
+						<p:inputMask id="cpf" value="#{pacienteBean.paciente.cpf}"
+							mask="999.999.999-99" validateMask="true" >
+							<f:validator validatorId="validaCPF"></f:validator>
+						</p:inputMask>
+						<h:outputLabel value="Nome:" for="nome" />
+						<p:inputText id="nome" value="#{pacienteBean.paciente.nome}" />
+
+						<h:outputLabel value="Telefone:" for="tel" />
+						<p:inputMask id="tel" value="#{pacienteBean.paciente.telefone}"
+							mask="(99) 9999-9999" validateMask="true" />
+
+						<h:outputLabel value="Endereço:" for="endereco" />
+						<p:inputTextarea id="endereco"
+							value="#{pacienteBean.paciente.endereco}" />
+
+						<h:outputLabel value="Sexo:" for="sexo" />
+						<h:selectOneMenu id="sexo" value="#{pacienteBean.paciente.sexo}">
+							<f:selectItem itemLabel="masculino" itemValue="masculino" />
+							<f:selectItem itemLabel="feminino" itemValue="feminino" />
+						</h:selectOneMenu>
+
+
+						<h:outputLabel value="Data de Nacimento" for="dataN" />
+						<p:calendar id="dataN"
+							value="#{pacienteBean.paciente.dataNasc.time}" />
+					</p:fieldset>
+				</p:tab>
+
+				<p:tab title="Dados do Atendimento">
 					
-					<h:outputLabel value="Receita:" for="receita" />
-					<h:inputTextarea id="receita" value="#{pacienteBean.atendimento.receita}"/>
-	
-					<h:outputLabel value="Recomendações:" for="recomendacoes" />
-					<h:inputTextarea id="recomendacoes" value="#{pacienteBean.atendimento.recomendacoes}" />
-					
-					<h:outputLabel value="Data" for="data" />
-					<h:inputText id="data" value="#{pacienteBean.atendimento.data.time}" >
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-					</h:inputText>
-					
-					 <h:commandButton action="#{pacienteBean.guardaAtendimento}" value="Guardar Atendimento" />
-					
-				</fieldset>					
-				
-				
-				<h:dataTable value="#{pacienteBean.paciente.atendimentos}" var="atendimento" styleClass="dados" rowClasses="impar,par">
-				<h:column>
-					<f:facet name="header">Medico</f:facet>
+										
+					<p:fieldset legend="Dados do atendimento">
+						<h:outputLabel value="Medico:" />
+						<h:selectOneMenu value="#{pacienteBean.idMedico}">
+							<f:selectItems value="#{medicoBean.medicos}" var="medico"
+								itemValue="#{medico.id}" itemLabel="#{medico.nome}" />
+						</h:selectOneMenu>
+
+						<h:outputLabel value="Receita:" for="receita" />
+						<p:inputTextarea id="receita"
+							value="#{pacienteBean.atendimento.receita}" />
+
+						<h:outputLabel value="Recomendações:" for="recomendacoes" />
+						<p:inputTextarea id="recomendacoes"
+							value="#{pacienteBean.atendimento.recomendacoes}" />
+
+
+						<h:outputLabel value="Data" for="data" />
+						<p:calendar id="data"
+							value="#{pacienteBean.atendimento.data.time}" />
+
+						<h:commandButton action="#{pacienteBean.guardaAtendimento}"
+							value="Guardar Atendimento" />
+
+					</p:fieldset>
+				</p:tab>
+
+
+
+			</p:tabView>
+
+
+
+			<p:dataTable value="#{pacienteBean.paciente.atendimentos}"
+				var="atendimento" paginator="true" rows="4" styleClass="dados" rowClasses="impar,par">
+				<p:column headerText="Médico">
 					#{atendimento.medico.nome}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Paciente</f:facet>
+				</p:column>
+				<p:column headerText="Paciente">
 					#{atendimento.paciente.nome}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Receita</f:facet>
+				</p:column>
+				<p:column headerText="Receita">
 					#{atendimento.receita}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Recomendações</f:facet>
+				</p:column>
+				<p:column headerText="Recomendações">
 					#{atendimento.recomendacoes}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Data</f:facet>
+				</p:column>
+				<p:column headerText="Data">
 					#{atendimento.data.time}
-					
-				</h:column>
-			</h:dataTable>
-				
-				
-				<h:commandButton value="Gravar" action="#{pacienteBean.gravar}">
-					<f:ajax execute="@form" render=":cadastro"></f:ajax>
-				</h:commandButton>
-			
+				</p:column>
+			</p:dataTable>
+
+
+			<h:commandButton value="Gravar" action="#{pacienteBean.gravar}">
+				<f:ajax execute="@form" render=":cadastro"></f:ajax>
+			</h:commandButton>
+
 		</h:form>
 
 	</ui:define>

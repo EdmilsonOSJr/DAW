@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="corpo">
+		
+		<h2>Listagem de pacientes</h2>	
+		<h:form id="lista">
+			<p:dataTable value="#{listaPacientesBean.pacientes}" var="paciente" paginator="true" rows="3">
+			
+				<p:column headerText="CPF">
+					#{paciente.cpf}
+				</p:column>
+				
+				<p:column headerText="Nome">
+					#{paciente.nome}
+				</p:column>
+				
+				<p:column headerText="Telefone">
+					#{paciente.telefone}
+				</p:column>
+				
+				<p:column headerText="Endereço">
+					#{paciente.endereco}
+				</p:column>
+				
+				<p:column headerText="Sexo">
+					#{paciente.sexo}
+				</p:column>
+				
+				<p:column headerText="Data de nascimento">
+					<h:outputText value="#{paciente.dataNasc.time}">										
+						<f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				
+				
+			</p:dataTable>			
+		</h:form>
+	
+	</ui:define>
+
+</ui:composition>
+
+</html>

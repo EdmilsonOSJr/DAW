@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html">
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
 	  
 <ui:composition template="/_template.xhtml">
 	
@@ -14,17 +15,16 @@
 	
 		<h:form id="formlogin">
 		
-			<fieldset>
-				<legend>Dados do Login</legend>	
+			<p:fieldset title="Dados do Login">
 				<h:outputLabel value="Login:" for="login"/>
-				<h:inputText id="login" value="#{loginBean.usuario.login}"/>
+				<p:inputText id="login" value="#{loginBean.usuario.login}"/>
 				<h:outputLabel value="Senha:" for="senha"/>
-				<h:inputSecret id="senha" value="#{loginBean.usuario.senha}"/>
+				<p:keyboard id="senha" value="#{loginBean.usuario.senha}" password="true"/>
 				<h:commandButton value="Efetuar Login" action="#{loginBean.efetuaLogin}"> 
 					<f:ajax execute="@form" render=":formlogin"></f:ajax>
 				</h:commandButton>
 		
-			</fieldset>
+			</p:fieldset>
 			
 		
 		</h:form>

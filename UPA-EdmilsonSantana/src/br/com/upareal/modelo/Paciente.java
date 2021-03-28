@@ -1,6 +1,7 @@
 package br.com.upareal.modelo;
 
 import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.List;
 

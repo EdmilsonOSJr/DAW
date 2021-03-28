@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Medico {
@@ -21,7 +24,11 @@ public class Medico {
 	
 	@Column(unique = true)
 	private String crm;
+	
+	@NotBlank(message = "Médico deve ter um nome válido.")
 	private String nome;
+	
+	@Pattern(regexp = "\\(\\d{2}\\)\\s\\d{4}\\-\\d{4}", message = "Telefone inválido.")
 	private String telefone;
 	private String area;
 	private Double salario;
